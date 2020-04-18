@@ -10,28 +10,6 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias Noospherical.{Repo, Articles}
-
-comments = [
-  %{
-    body: "Elixir + Phoenix === 💜"
-  },
-  %{
-    body: "JavaScript?!?!  What JavaScript..."
-  }
-]
-
-case Repo.all(Articles.Comment) do
-  [] ->
-    comments
-    |> Enum.each(fn comment ->
-      Articles.create_comment(comment)
-    end)
-
-  _ ->
-    IO.puts("Already have some comments")
-end
-
 alias Noospherical.Articles
 alias Noospherical.Accounts
 

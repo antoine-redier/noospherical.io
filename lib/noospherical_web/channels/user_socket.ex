@@ -25,9 +25,6 @@ defmodule NoosphericalWeb.UserSocket do
   #      :error
   # end
   # end
-  def connect(_params, socket, _connect_info) do
-    {:ok, socket}
-  end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #

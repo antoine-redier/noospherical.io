@@ -5,6 +5,4 @@
   <% else %>
   <div class="row"><%= link "See articles", to: Routes.article_path(@conn, :index), class: "white-text col s6 offset-s3" %>
    <%= link "See videos", to: Routes.video_path(@conn, :index), class: "white-text col s6" %></div>
-
-   <%= live_render(@conn, NoosphericalWeb.CommentLive.Index) %>
   <% end %>

@@ -23,7 +23,6 @@ defmodule NoosphericalWeb do
 
       import Plug.Conn
       import NoosphericalWeb.Gettext
-      import Phoenix.LiveView.Controller
       import NoosphericalWeb.Auth, only: [authenticate_user: 2, authenticate_admin: 2]
       alias NoosphericalWeb.Router.Helpers, as: Routes
     end
@@ -37,7 +36,6 @@ defmodule NoosphericalWeb do
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
-      import Phoenix.LiveView.Helpers, only: [live_render: 2, live_render: 3]
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -53,7 +51,6 @@ defmodule NoosphericalWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
-      import Phoenix.LiveView.Router
       import NoosphericalWeb.Auth, only: [authenticate_user: 2, authenticate_admin: 2]
     end
   end
