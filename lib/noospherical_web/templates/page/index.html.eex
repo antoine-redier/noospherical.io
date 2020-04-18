@@ -1,0 +1,8 @@
+
+
+ <%= if !@current_user do %>
+    <p class="white-text">You must <%= link "register", class: "red-text text-darken-2", to: Routes.user_path(@conn, :new) %> to get access.</p>
+  <% else %>
+  <div class="row"><%= link "See articles", to: Routes.article_path(@conn, :index), class: "white-text col s6 offset-s3" %>
+   <%= link "See videos", to: Routes.video_path(@conn, :index), class: "white-text col s6" %></div>
+  <% end %>

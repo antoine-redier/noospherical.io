@@ -1,0 +1,21 @@
+<div class="container" style="padding-right: 2rem; border-radius: 40px 0 0 0; border-top: solid 2px white; border-left: solid 2px white; margin-bottom: -1.2rem; height: 100px; width: 100%">
+<h3 class="white-text center" style="margin-bottom: 3rem"><%= @article.title %></h3>
+</div>
+<ul>
+
+  <li class="red-text text-darken-2">
+    <%= @article.category_id %>
+  </li>
+
+  <li class="background white" style="padding: 5rem; border-radius: 0 0 20px 0">
+    <strong><%= markdown(@article.body) %></strong>
+  </li>
+</ul>
+
+<%= if @current_user.admin do %>
+  <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article), class: "red-text darken-2" %></span>
+<% end %>
+  <span><%= link "Back", to: Routes.article_path(@conn, :index), class: "red-text darken-2" %></span>
+
+
+

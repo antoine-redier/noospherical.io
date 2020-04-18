@@ -1,0 +1,19 @@
+<h3 class="red-text text-darken-2"> <strong style="margin-bottom: 3rem; font-weight: 600"><%= @user.name %>'s</strong> profile</h3>
+
+<div class="row white-text" style="margin-top: 3rem">
+<div class="col">
+<%= gravatar(@user.email) %>
+</div>
+
+<div class="col">
+<strong style="font-weight: 600; font-size: 21px"><%= @user.name %></strong>
+
+<em style="font-weight: 300; font-size: 18px">[@<%= @user.username %>]</em>
+
+<p style="font-weight: 300; font-size: 18px"><strong style="font-weight: 600; font-size: 21px">Birthdate - </strong> <%= @user.age %>
+<br><strong style="font-weight: 600; font-size: 21px">Gender - </strong> <%= @user.gender %>
+</p>
+</div>
+</div>
+
+

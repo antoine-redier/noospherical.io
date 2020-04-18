@@ -1,0 +1,3 @@
+<div style="font-family: 'Lato'; margin-top: 2rem">
+  <%= render "user.html", user: @user %>
+</div>
