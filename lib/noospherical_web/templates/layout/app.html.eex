@@ -9,14 +9,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <%= csrf_meta_tag() %>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
-      <script>
-      <%= if @conn.assigns.current_user do %>
-        window.userToken = "<%= Phoenix.Token.sign(NoosphericalWeb.Endpoint, "key", @conn.assigns.current_user.id) %>"
-      <% end %>
-    </script>
   </head>
+
   <body class="background black">
     <nav class="navbar transparent">
       <div class="nav-wrapper container">
@@ -69,6 +63,9 @@
     </main>
 
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 
     <script>
        document.addEventListener('DOMContentLoaded', function() {

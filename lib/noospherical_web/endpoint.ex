@@ -10,9 +10,7 @@ defmodule NoosphericalWeb.Endpoint do
     signing_salt: "16W9fw+c"
   ]
 
-  socket "/socket", NoosphericalWeb.UserSocket,
-    websocket: true,
-    longpoll: false
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #

@@ -4,10 +4,12 @@ defmodule NoosphericalWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    # plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug NoosphericalWeb.Auth
+    # plug :put_root_layout, {NoosphericalWeb.LayoutView, :root}
   end
 
   pipeline :api do
@@ -22,7 +24,8 @@ defmodule NoosphericalWeb.Router do
     resources "/users", UserController, only: [:show, :new, :create]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
-    resources "/articles", ArticleController
+    resources "/articles", ArticleController do
+    end
 
     resources "/videos", VideoController
   end

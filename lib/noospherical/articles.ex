@@ -9,6 +9,60 @@ defmodule Noospherical.Articles do
   alias Noospherical.Accounts
   alias Noospherical.Articles.Category
 
+  alias Noospherical.Articles.Comment
+
+  @pubsub Noospherical.PubSub
+  @topic "comments"
+
+  def subscribe(content_id) do
+    Phoenix.PubSub.subscribe(@pubsub, topic(content_id))
+  end
+
+  defp topic(content_id), do: "#{@topic}:#{content_id}"
+
+  def list_root_comments do
+    from(c in Comment, where: is_nil(c.parent_id), order_by: [asc: :inserted_at])
+    |> Repo.all()
+  end
+
+  def create_comment(attrs \\ %{}) do
+    %Comment{}
+    |> Comment.changeset(attrs)
+    |> Repo.insert()
+    |> preload()
+    |> broadcast_new_comment()
+  end
+
+  defp preload({:ok, %Comment{} = comment}), do: {:ok, Repo.preload(comment, :children)}
+  defp preload({:error, _reason} = err), do: err
+
+  defp broadcast_new_comment({:ok, comment}) do
+    Phoenix.PubSub.broadcast_from!(
+      @pubsub,
+      self(),
+      topic("lobby"),
+      {__MODULE__, :new_comment, comment}
+    )
+
+    {:ok, comment}
+  end
+
+  defp broadcast_new_comment({:error, _} = err), do: err
+
+  def fetch_child_comments(parent_ids) do
+    from(c in Comment, where: c.parent_id in ^parent_ids)
+    |> Repo.all()
+    |> Enum.group_by(& &1.parent_id)
+  end
+
+  def nested_comments(comments) do
+    Comment.nested(comments)
+  end
+
+  def change_comment(comment \\ %Comment{}) do
+    Comment.changeset(comment, %{})
+  end
+
   @doc """
   Returns the list of articles.
 
