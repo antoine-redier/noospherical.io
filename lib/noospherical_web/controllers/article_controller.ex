@@ -18,9 +18,12 @@ defmodule NoosphericalWeb.ArticleController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  def index(conn, _params, _current_user) do
-    articles = Articles.list_articles()
-    render(conn, "index.html", articles: articles)
+  def index(conn, params, _current_user) do
+    page =
+      Articles.Article
+      |> Noospherical.Repo.paginate(params)
+
+    render(conn, "index.html", articles: page.entries, page: page)
   end
 
   def new(conn, _params, _current_user) do

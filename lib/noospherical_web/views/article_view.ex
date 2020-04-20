@@ -1,5 +1,6 @@
 defmodule NoosphericalWeb.ArticleView do
   use NoosphericalWeb, :view
+  import Scrivener.HTML
 
   def gravatar(email) do
     hash =

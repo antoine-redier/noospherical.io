@@ -14,6 +14,7 @@ defmodule Noospherical.Accounts.User do
     field :admin, :boolean, default: false
 
     has_many :articles, Noospherical.Articles.Article
+    has_many :comments, Noospherical.Comment
 
     timestamps()
   end

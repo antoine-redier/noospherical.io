@@ -12,58 +12,7 @@
 </script>
 
 
-<h3 class="white-text" style="margin-bottom: 3rem">|> new_user</h3>
+<h3 class="white-text" style="margin-bottom: 3rem; margin-top: 3em">|> new_user</h3>
 
-<div class="row" style="margin-bottom: 3rem"><%= form_for @changeset, Routes.user_path(@conn, :create), fn f -> %>
-    <%= if @changeset.action do %>
-      <div class="alert alert-danger" style="font-size: 20px; margin-bottom: 3rem">
-        <p>Oops, something went wrong! Please check the errors below.</p>
-      </div>
-    <% end %>
+<%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :create)) %>
 
-
-
-    <div class="input-field col s6">
-      <%= text_input f, :name, class: "validate white-text", type: "text", id: "name" %>
-      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :name %></div>
-      <label class="white-text" for="name">Name</label>
-    </div>
-
-
-
-    <div class="input-field col s6">
-      <%= text_input f, :username, class: "validate white-text", type: "text", id: "username" %>
-      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :username %></div>
-      <label class="white-text"  for="username">Username</label>
-    </div>
-
-    <div class="input-field col s12">
-      <%= email_input f, :email, class: "validate white-text", type: "text", id: "email" %>
-      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :email %></div>
-      <label class="white-text"  for="email">Email address</label>
-    </div>
-
-    <div class="input-field col s12">
-      <%= password_input f, :password, class: "validate white-text", type: "password", id: "password" %>
-      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :password %></div>
-      <label class="white-text"  for="password">Password</label>
-    </div>
-
-    <div class="input-field col s6">
-      <%= text_input f, :gender, class: "validate white-text", type: "text", id: "gender" %>
-      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :gender %></div>
-      <label class="white-text"  for="gender">Gender</label>
-    </div>
-
-    <div class="input-field col s6">
-      <%= text_input f, :age, class: "datepicker white-text", id: "age" %>
-      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :age %></div>
-      <label class="white-text"  for="age">Birthdate</label>
-    </div>
-
-
-    <div class="col s12">
-    <%= submit "Create User", class: "col s6 btn red darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
-    </div>
-  </div>
-<% end %>

@@ -7,6 +7,9 @@
 # General application configuration
 use Mix.Config
 
+config :scrivener_html,
+  routes_helper: NoosphericalWeb.Router.Helpers
+
 config :noospherical,
   ecto_repos: [Noospherical.Repo]
 

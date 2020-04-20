@@ -18,9 +18,12 @@ defmodule NoosphericalWeb.VideoController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  def index(conn, _params, _current_user) do
-    videos = Multimedia.list_videos()
-    render(conn, "index.html", videos: videos)
+  def index(conn, params, _current_user) do
+    page =
+      Noospherical.Multimedia.Video
+      |> Noospherical.Repo.paginate(params)
+
+    render(conn, "index.html", videos: page.entries, page: page)
   end
 
   def new(conn, _params, _current_user) do
@@ -44,7 +47,6 @@ defmodule NoosphericalWeb.VideoController do
     video = Multimedia.get_video!(id)
 
     conn
-    |> assign(:path, Video.local_path(id, video.title))
     |> render("show.html", video: video)
   end
 

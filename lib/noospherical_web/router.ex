@@ -19,7 +19,10 @@ defmodule NoosphericalWeb.Router do
 
     get "/", PageController, :index
 
-    resources "/users", UserController, only: [:show, :new, :create]
+    resources "/users", UserController, only: [:show, :new, :create, :edit] do
+      resources "/comments", CommentController, only: [:index]
+    end
+
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
     resources "/articles", ArticleController do

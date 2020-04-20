@@ -19,7 +19,7 @@ defmodule Noospherical.Articles do
   end
 
   def list_articles do
-    Repo.all(Article)
+    Repo.paginate(Article)
   end
 
   @doc """

@@ -1,26 +1,29 @@
-<h2 class="white-text">All <strong>Videos<strong></h2>
+<h3 style="margin-bottom: 3rem; margin-top: 3em" class="white-text">All <strong>Videos<strong></h3>
 
-<table class="white-text">
-  <tbody>
 <%= for video <- @videos do %>
-    <tr>
 
-      <td><%= video.title %></td>
-      <td><%= video.description %></td>
-      <td><%= link "Watch", to: Routes.video_path(@conn, :show, video), class: "red-text text-darken-2"%></td>
+ <div class="row white-text">
+    <div class="col s12">
+      <div class="card grey darken-4">
+        <div class="card-content white-text">
+          <span class="card-title"><%= video.title %></span>
+          <p class="center" style="font-size: 18px"><%= video.description %></p>
+        </div>
+        <div class="card-action center" style="font-size: 20px; font-weight: 600">
+          <a><%= link "Watch", to: Routes.video_path(@conn, :show, video), class: "grey-text"%></a>
+          <%= if @current_user.admin do %>
+          <a><%= link "Edit", to: Routes.video_path(@conn, :edit, video), class: "grey-text" %></a>
+          <a><%= link "Delete", to: Routes.video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"], class: "grey-text" %></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <td>
-
-        <%= if @current_user.admin do %>
-        <span><%= link "Edit", to: Routes.video_path(@conn, :edit, video), class: "red-text text-darken-2" %></span>
-        <span><%= link "Delete", to: Routes.video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"], class: "red-text text-darken-2" %></span>
-        <% end %>
-      </td>
-    </tr>
 <% end %>
-  </tbody>
-</table>
 
 <%= if @current_user.admin do %>
 <span><%= link "New Video", to: Routes.video_path(@conn, :new), class: "red-text text-darken-2" %></span>
 <% end %>
+
+<div class="center"><%= pagination_links @page, view_style: :materialize %>></div>

@@ -18,7 +18,7 @@
     </script>
   </head>
   <body class="background black">
-    <nav class="navbar transparent">
+    <nav class="navbar red darken-1">
       <div class="nav-wrapper container">
       <div class="left">
       <a href="/" class="brand-logo left" style="font-weight: 600">noospherical.io</a>
@@ -44,6 +44,7 @@
     <li><div class="user-view">
       <div class="background red darken-1">
       </div>
+      <a class="right" href="/users/<%=@current_user.id%>/edit"><i class="material-icons white-text">settings</i></a>
       <a href="/users/<%= @current_user.id  %>"><img class="circle" src="<%=gravatar(@current_user.email) %>"></a>
       <a href="/users/<%= @current_user.id  %>"><span class="white-text name"><%= @current_user.name %></span></a>
       <div class="white-text email"><%=@current_user.email%></div>
@@ -62,7 +63,7 @@
         <div class="divider white row" style="width: 500px; margin-top: -0.9rem"></div>
 
 
-    <main role="main" class="container" style="margin-top: 3rem">
+    <main role="main" class="container" style="margin-top: 3em">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>

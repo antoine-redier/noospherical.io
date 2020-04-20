@@ -1,4 +1,4 @@
-<div class="container" style="padding-right: 2rem; border-radius: 40px 0 0 0; border-top: solid 2px white; border-left: solid 2px white; margin-bottom: -1.2rem; height: 100px; width: 100%">
+<div class="container" style="padding-right: 2rem; border-radius: 40px 0 0 0; border-top: solid 2px white; border-left: solid 2px white; margin-bottom: -1.2rem; margin-top: 5em; height: 100px; width: 100%">
 <h3 class="white-text center" style="margin-bottom: 3rem"><%= @article.title %></h3>
 </div>
 <ul>
@@ -18,20 +18,19 @@
 
   <span><%= link "Back", to: Routes.article_path(@conn, :index), class: "red-text darken-2" %></span>
 
-<h4 class="red-text text-darken-2" style="margin-top: 8rem">Comments</h4>
-
-<div style="margin-top: 5rem; margin-bottom: 3rem"><%= render NoosphericalWeb.CommentView, "new.html", conn: @conn, article: @article, comment_changeset: @comment_changeset %></div>
+<div style="margin-top: 10em; margin-bottom: 3rem"><%= render NoosphericalWeb.CommentView, "new.html", conn: @conn, article: @article, comment_changeset: @comment_changeset %></div>
 
 
 <%= for comment <- @article.comments do %>
 <div class="row">
   <div class="col s12">
-    <div class="card background grey darken-4">
+    <div class="card background black" style="border-radius: 6px">
       <div class="card-content row">
         <span class="card-title col s2">
-          <%= get_user_avatar(comment.user_id) %></span>
-          <span class="card-title col s10 grey-text"><%= get_user_name(comment.user_id) %><em>(@<%= get_user_username(comment.user_id) %>)</em>
+          <a href="/users/<%=comment.user_id%>"><%= get_user_avatar(comment.user_id) %></a></span>
+          <span class="card-title col s10 grey-text"><a class="red-text text-darken-2" href="/users/<%=comment.user_id%>"><%= get_user_name(comment.user_id) %></a><em style="font-size: 18px">  @<%= get_user_username(comment.user_id) %></em>
        <div class="divider col s12"></div>
+          <b class="right" style="font-size: 12px"><%= comment.inserted_at %></b>
         <br><br><span class="white-text card-content" style="font-size: 18px; overflow-wrap: break-word"><%= comment.text %></span>
         </span>
       </div>
