@@ -44,7 +44,9 @@ defmodule Noospherical.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:pbkdf2_elixir, "~> 1.0"},
-      {:earmark, "~> 1.4.3"}
+      {:earmark, "~> 1.4.3"},
+      {:scrivener_ecto, "~> 2.3"},
+      {:scrivener_html, "~> 1.8"}
     ]
   end
 

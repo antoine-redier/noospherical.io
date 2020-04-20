@@ -12,4 +12,16 @@ defmodule NoosphericalWeb.UserView do
     img = "https://www.gravatar.com/avatar/#{hash}?s=150&d=identicon"
     img_tag(img, class: "circle")
   end
+
+  def get_article(id) do
+    article = Noospherical.Repo.get!(Noospherical.Articles.Article, id)
+
+    article.title
+  end
+
+  def get_article_url(id) do
+    article = Noospherical.Repo.get!(Noospherical.Articles.Article, id)
+
+    "#{id}-#{article.slug}"
+  end
 end
