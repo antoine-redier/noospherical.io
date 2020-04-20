@@ -8,7 +8,7 @@
 use Mix.Config
 
 config :noospherical,
-  uploads_directory: Path.expand("/home/basilisk/uploads_dev")
+  ecto_repos: [Noospherical.Repo]
 
 # Configures the endpoint
 config :noospherical, NoosphericalWeb.Endpoint,

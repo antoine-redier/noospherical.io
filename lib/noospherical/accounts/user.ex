@@ -13,6 +13,8 @@ defmodule Noospherical.Accounts.User do
     field :username, :string
     field :admin, :boolean, default: false
 
+    has_many :articles, Noospherical.Articles.Article
+
     timestamps()
   end
 

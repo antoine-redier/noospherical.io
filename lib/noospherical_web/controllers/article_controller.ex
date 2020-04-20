@@ -3,6 +3,7 @@ defmodule NoosphericalWeb.ArticleController do
 
   alias Noospherical.Articles
   alias Noospherical.Articles.Article
+  alias Noospherical.Comment
 
   plug :authenticate_admin when action in [:new, :create, :edit, :update]
   plug :authenticate_user
@@ -40,9 +41,13 @@ defmodule NoosphericalWeb.ArticleController do
   end
 
   def show(conn, %{"id" => id}, _current_user) do
-    article = Articles.get_article!(id)
+    article =
+      Articles.get_article!(id)
+      |> Noospherical.Repo.preload(:comments)
 
-    render(conn, "show.html", article: article)
+    comment_changeset = Noospherical.Comment.changeset(%Noospherical.Comment{})
+
+    render(conn, "show.html", article: article, comment_changeset: comment_changeset)
   end
 
   def edit(conn, %{"id" => id}, current_user) do

@@ -22,7 +22,9 @@ defmodule NoosphericalWeb.Router do
     resources "/users", UserController, only: [:show, :new, :create]
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
-    resources "/articles", ArticleController
+    resources "/articles", ArticleController do
+      resources "/comments", CommentController, only: [:create]
+    end
 
     resources "/videos", VideoController
   end

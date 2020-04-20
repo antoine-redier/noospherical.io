@@ -10,6 +10,7 @@ defmodule Noospherical.Articles.Article do
 
     belongs_to :user, Noospherical.Accounts.User
     belongs_to :category, Noospherical.Articles.Category
+    has_many :comments, Noospherical.Comment
 
     timestamps()
   end
