@@ -6,13 +6,13 @@
     <div class="col s12">
       <div class="card transparent" style="border-left: 7px solid #212121; box-shadow: none">
         <div class="card-content white-text">
-          <span class="card-title" style="margin-bottom: 2rem"><%= article.title %> <b style="font-size: 18px"> — <a class="red-text text-darken-2" href="/users/<%=article.user_id%>"><%=get_user_name(article.user_id)%></a></b></span>
+          <span class="card-title" style="margin-bottom: 2rem"><%= article.title %> <b style="font-size: 18px"> — <a class="red-text text-darken-2" href="/users/<%=article.user_id%>"><%=get_user_name(article.user_uuid)%></a></b></span>
 
           <p class="truncate grey-text" style="font-size: 16px"><em><%= article.body %></em></p>
         </div>
         <div class="card-action transparent right" style="border-top: 0px; font-size: 20px; font-weight: 600">
           <a><%= link "Show", to: Routes.article_path(@conn, :show, article), class: "white-text" %></a>
-            <%= if (@current_user && @current_user.admin) || (@current_user && article.user_id == @current_user.id && @current_user.author) do %>
+            <%= if (@current_user && @current_user.admin) || (@current_user && article.user_uuid == @current_user.uuid && @current_user.author) do %>
           <a><%= link "Edit", to: Routes.article_path(@conn, :edit, article), class: "white-text" %></a>
           <a><%= link "Delete", to: Routes.article_path(@conn, :delete, article), method: :delete, data: [confirm: "Are you sure?"], class: "white-text" %></a>
            <% end %>

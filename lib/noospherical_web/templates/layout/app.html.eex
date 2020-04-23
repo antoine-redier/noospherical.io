@@ -13,7 +13,7 @@
       <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
       <script>
       <%= if @conn.assigns.current_user do %>
-        window.userToken = "<%= Phoenix.Token.sign(NoosphericalWeb.Endpoint, "key", @conn.assigns.current_user.id) %>"
+        window.userToken = "<%= Phoenix.Token.sign(NoosphericalWeb.Endpoint, "key", @conn.assigns.current_user.uuid) %>"
       <% end %>
     </script>
   </head>
@@ -44,9 +44,9 @@
     <li><div class="user-view">
       <div class="background red darken-1">
       </div>
-      <a class="right" href="/users/<%=@current_user.id%>/edit"><i class="material-icons white-text">settings</i></a>
-      <a href="/users/<%= @current_user.id  %>"><img class="circle" src="<%=gravatar(@current_user.email) %>"></a>
-      <a href="/users/<%= @current_user.id  %>"><span class="white-text name"><%= @current_user.name %></span></a>
+      <a class="right" href="/users/<%=@current_user.uuid%>/edit"><i class="material-icons white-text">settings</i></a>
+      <a href="/users/<%= @current_user.uuid  %>"><img class="circle" src="<%=gravatar(@current_user.email) %>"></a>
+      <a href="/users/<%= @current_user.uuid  %>"><span class="white-text name"><%= @current_user.name %></span></a>
       <div class="white-text email"><%=@current_user.email%></div>
     </div></li>
 

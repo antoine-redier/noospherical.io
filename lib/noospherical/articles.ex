@@ -36,7 +36,7 @@ defmodule Noospherical.Articles do
   ** (Ecto.NoResultsError)
 
   """
-  def get_article!(id), do: Repo.get!(Article, id)
+  def get_article!(id), do: Repo.get_by!(Article, uuid: id)
 
   @doc """
   Creates a article.
@@ -116,7 +116,7 @@ defmodule Noospherical.Articles do
     |> Repo.get!(id)
   end
 
-  defp user_articles_query(query, %User{id: user_id}) do
-    from(v in query, where: v.user_id == ^user_id)
+  defp user_articles_query(query, %User{uuid: user_uuid}) do
+    from(v in query, where: v.user_uuid == ^user_uuid)
   end
 end

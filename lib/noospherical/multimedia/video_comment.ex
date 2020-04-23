@@ -1,11 +1,11 @@
 defmodule Noospherical.Multimedia.VideoComment do
-  use Ecto.Schema
+  use Noospherical.Schema
   import Ecto.Changeset
 
   schema "video_comments" do
     field :text, :string
-    field :user_id, :id
-    field :video_id, :id
+    field :user_uuid, :binary_id
+    field :video_uuid, :binary_id
 
     timestamps()
   end

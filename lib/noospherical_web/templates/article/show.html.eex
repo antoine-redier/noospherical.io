@@ -16,16 +16,16 @@
 </ul>
 
 <div class="red-text text-darken-2 row">
-<a class="col s2" href="/users/<%=@article.user_id%>">
+<a class="col s2" href="/users/<%=@article.user_uuid%>">
 
-<div><%= get_user_avatar(@article.user_id) %> </div></a>
+<div><%= get_user_avatar(@article.user_uuid) %> </div></a>
 <b class="col s10" style="font-size: 18px; font-weight: 600; border-left: 3px solid #d32f2f">
-<%=get_user_name(@article.user_id)%><br>
-<em style="font-size: 12px; font-weight: 400">@<%=get_user_username(@article.user_id)%></em><br>
-<%= get_user_twitter(@article.user_id) %>
+<%=get_user_name(@article.user_uuid)%><br>
+<em style="font-size: 12px; font-weight: 400">@<%=get_user_username(@article.user_uuid)%></em><br>
+<%= get_user_twitter(@article.user_uuid) %>
 </b></div>
 
-<%= if (@current_user && @current_user.admin) || (@current_user && @article.user_id == @current_user.id) do %>
+<%= if (@current_user && @current_user.admin) || (@current_user && @article.user_uuid == @current_user.uuid) do %>
   <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article), class: "red-text darken-2 right" %></span>
 <% end %>
 
@@ -44,8 +44,8 @@
     <div class="card background transparent" style="box-shadow: none">
       <div class="card-content row">
         <span class="card-title col s2">
-          <a href="/users/<%=comment.user_id%>"><%= get_user_avatar(comment.user_id) %></a></span>
-          <span class="card-title col s10 grey-text"><a class="red-text text-darken-2" style="font-size: 20px" href="/users/<%=comment.user_id%>"><%= get_user_name(comment.user_id) %></a><em style="font-size: 18px">  @<%= get_user_username(comment.user_id) %></em>
+          <a href="/users/<%=comment.user_uuid%>"><%= get_user_avatar(comment.user_uuid) %></a></span>
+          <span class="card-title col s10 grey-text"><a class="red-text text-darken-2" style="font-size: 20px" href="/users/<%=comment.user_uuid%>"><%= get_user_name(comment.user_uuid) %></a><em style="font-size: 18px">  @<%= get_user_username(comment.user_uuid) %></em>
        <div class="divider col s12 grey darken-4" style= "border-right: solid 200px white"></div>
           <b class="right" style="font-size: 11px"><%= comment.inserted_at %></b>
         <br><br><span class="white-text card-content" style="font-size: 16px; overflow-wrap: break-word"><%= comment.text %></span>

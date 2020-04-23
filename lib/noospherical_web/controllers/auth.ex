@@ -6,13 +6,13 @@ defmodule NoosphericalWeb.Auth do
   def init(opts), do: opts
 
   def call(conn, _opts) do
-    user_id = get_session(conn, :user_id)
+    user_uuid = get_session(conn, :user_uuid)
 
     cond do
       conn.assigns[:current_user] ->
         conn
 
-      user = user_id && Noospherical.Accounts.get_user(user_id) ->
+      user = user_uuid && Noospherical.Accounts.get_user(user_uuid) ->
         assign(conn, :current_user, user)
 
       true ->
@@ -24,7 +24,7 @@ defmodule NoosphericalWeb.Auth do
     conn
     |> assign(:current_user, user)
     |> assign(:admin, user.admin)
-    |> put_session(:user_id, user.id)
+    |> put_session(:user_uuid, user.uuid)
     |> configure_session(renew: true)
   end
 

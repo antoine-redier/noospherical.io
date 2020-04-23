@@ -1,6 +1,6 @@
 defmodule Noospherical.Accounts.User do
   @derive {Jason.Encoder, only: [:comments]}
-  use Ecto.Schema
+  use Noospherical.Schema
   import Ecto.Changeset
 
   schema "users" do

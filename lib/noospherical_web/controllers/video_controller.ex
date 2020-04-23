@@ -56,7 +56,7 @@ defmodule NoosphericalWeb.VideoController do
   def edit(conn, %{"id" => id}, current_user) do
     video = Multimedia.get_video!(id)
 
-    case video.user_id == current_user.id || current_user.admin do
+    case video.user_uuid == current_user.uuid || current_user.admin do
       true ->
         changeset = Multimedia.change_video(video)
         render(conn, "edit.html", video: video, changeset: changeset)
@@ -86,7 +86,7 @@ defmodule NoosphericalWeb.VideoController do
   def delete(conn, %{"id" => id}, current_user) do
     video = Multimedia.get_video!(id)
 
-    case video.user_id == current_user.id ||
+    case video.user_uuid == current_user.uuid ||
            current_user.admin do
       true ->
         Multimedia.delete_video(video)

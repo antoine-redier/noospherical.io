@@ -5,12 +5,15 @@ defmodule NoosphericalWeb.CommentController do
 
   alias Noospherical.Articles
 
-  def create(conn, %{"comment" => comment_params, "article_id" => article_id}) do
-    article = Noospherical.Repo.get(Articles.Article, article_id)
+  def create(conn, %{"comment" => comment_params, "article_id" => article_uuid}) do
+    article = Noospherical.Repo.get_by!(Articles.Article, uuid: article_uuid)
 
     current_user = conn.assigns.current_user
 
-    Ecto.build_assoc(article, :comments, text: comment_params["text"], user_id: current_user.id)
+    Ecto.build_assoc(article, :comments,
+      text: comment_params["text"],
+      user_uuid: current_user.uuid
+    )
     |> Noospherical.Repo.insert()
 
     conn
@@ -18,14 +21,14 @@ defmodule NoosphericalWeb.CommentController do
     |> redirect(to: Routes.article_path(conn, :show, article))
   end
 
-  def create(conn, %{"video_comment" => comment_params, "video_id" => video_id}) do
-    video = Noospherical.Repo.get(Noospherical.Multimedia.Video, video_id)
+  def create(conn, %{"video_comment" => comment_params, "video_id" => video_uuid}) do
+    video = Noospherical.Repo.get_by!(Noospherical.Multimedia.Video, uuid: video_uuid)
 
     current_user = conn.assigns.current_user
 
     Ecto.build_assoc(video, :video_comments,
       text: comment_params["text"],
-      user_id: current_user.id
+      user_uuid: current_user.uuid
     )
     |> Noospherical.Repo.insert()
 
@@ -34,16 +37,16 @@ defmodule NoosphericalWeb.CommentController do
     |> redirect(to: Routes.video_path(conn, :show, video))
   end
 
-  def index(conn, %{"user_id" => user_id} = params) do
+  def index(conn, %{"user_id" => user_uuid} = params) do
     article_page =
       Ecto.Query.from(c in Noospherical.Comment,
-        where: c.user_id == ^user_id
+        where: c.user_uuid == ^user_uuid
       )
       |> Noospherical.Repo.paginate(params)
 
     video_page =
       Ecto.Query.from(c in Noospherical.Multimedia.VideoComment,
-        where: c.user_id == ^user_id
+        where: c.user_uuid == ^user_uuid
       )
       |> Noospherical.Repo.paginate(params)
 

@@ -54,7 +54,7 @@ defmodule NoosphericalWeb.ArticleController do
   def edit(conn, %{"id" => id}, current_user) do
     article = Articles.get_article!(id)
 
-    case article.user_id == current_user.id ||
+    case article.user_uuid == current_user.uuid ||
            current_user.admin do
       true ->
         changeset = Articles.change_article(article)
@@ -85,7 +85,7 @@ defmodule NoosphericalWeb.ArticleController do
   def delete(conn, %{"id" => id}, current_user) do
     article = Articles.get_article!(id)
 
-    case article.user_id == current_user.id ||
+    case article.user_uuid == current_user.uuid ||
            current_user.admin do
       true ->
         Articles.delete_article(article)

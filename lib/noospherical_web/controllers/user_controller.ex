@@ -38,9 +38,9 @@ defmodule NoosphericalWeb.UserController do
     end
   end
 
-  def show(conn, %{"id" => id}, current_user) do
+  def show(conn, %{"id" => uuid}, current_user) do
     user =
-      Accounts.get_user!(id)
+      Accounts.get_user(uuid)
       |> Noospherical.Repo.preload(:comments)
 
     render(conn, "show.html", user: user, current_user: current_user)

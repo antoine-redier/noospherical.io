@@ -1,11 +1,11 @@
 defmodule Noospherical.Comment do
-  use Ecto.Schema
+  use Noospherical.Schema
   import Ecto.Changeset
 
   schema "comments" do
     field :text, :string
-    field :user_id, :id
-    field :article_id, :id
+    field :user_uuid, :binary_id
+    field :article_uuid, :binary_id
 
     timestamps()
   end
