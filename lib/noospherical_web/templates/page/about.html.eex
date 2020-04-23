@@ -11,7 +11,7 @@
                 Here you'll find all my projects (done or in progress), as well as a few blog posts and videos.
               </p>
               <p>
-                <a href="/work" class="btn red darken-2"
+                <a href="#" class="btn disabled red darken-2"
                   >Portfolio</a
                 >
               </p>
@@ -45,7 +45,7 @@
                 <input
                   type="submit"
                   value="Subscribe to newsletter"
-                  class="btn red darken-2"
+                  class="btn disabled red darken-2"
                 />
               </form>
             </div>
