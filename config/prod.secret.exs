@@ -5,30 +5,16 @@
 use Mix.Config
 
 database_url =
-  System.get_env("DATABASE_URL") ||
-    raise """
-    environment variable DATABASE_URL is missing.
-    For example: ecto://USER:PASS@HOST/DATABASE
-    """
+  "postgresql://doadmin:pchmkc2g5dm7uqju@noospherical-db-do-user-6793247-0.a.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
 
 config :noospherical, Noospherical.Repo,
-  # ssl: true,
+  ssl: true,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
-secret_key_base =
-  System.get_env("SECRET_KEY_BASE") ||
-    raise """
-    environment variable SECRET_KEY_BASE is missing.
-    You can generate one by calling: mix phx.gen.secret
-    """
+secret_key_base = "9DkFE23VE73zTL/vckM4aladYm/DIpMg5562APhyRHbNkw2xCCcgC+xrhFhj3p4Q"
 
-config :noospherical, NoosphericalWeb.Endpoint,
-  http: [
-    port: String.to_integer(System.get_env("PORT") || "4000"),
-    transport_options: [socket_opts: [:inet6]]
-  ],
-  secret_key_base: secret_key_base
+config :noospherical, NoosphericalWeb.Endpoint, secret_key_base: secret_key_base
 
 # ## Using releases (Elixir v1.9+)
 #

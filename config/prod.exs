@@ -10,7 +10,15 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :noospherical, NoosphericalWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  force_ssl: [hsts: true]
+  url: [host: "noospherical.io", port: 443],
+  https: [
+    port: 443,
+    cipher_suite: :strong,
+    keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
+    certfile: System.get_env("SOME_APP_SSL_CERT_PATH"),
+    transport_options: [socket_opts: [:inet6]]
+  ]
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
