@@ -13,7 +13,7 @@ defmodule Noospherical.Multimedia.VideoComment do
   @doc false
   def changeset(comment, attrs \\ %{}) do
     comment
-    |> cast(attrs, [:text, :parent_id])
+    |> cast(attrs, [:text])
     |> validate_required([:text])
   end
 end
