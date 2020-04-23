@@ -41,3 +41,5 @@ npm-debug.log
 
 /config/releases.exs
 
+/config/dev.exs
+
