@@ -21,7 +21,7 @@ config :noospherical, NoosphericalWeb.Endpoint, secret_key_base: secret_key_base
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :noospherical, NoosphericalWeb.Endpoint, server: true
+config :noospherical, NoosphericalWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
