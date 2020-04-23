@@ -15,9 +15,8 @@ config :noospherical, NoosphericalWeb.Endpoint,
   https: [
     port: 443,
     cipher_suite: :strong,
-    keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-    certfile: System.get_env("SOME_APP_SSL_CERT_PATH"),
-    transport_options: [socket_opts: [:inet6]]
+    keyfile: System.get_env("priv/ssl/noospherical.key"),
+    certfile: System.get_env("priv/ssl/noospherical.csr")
   ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
