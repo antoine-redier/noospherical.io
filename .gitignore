@@ -35,4 +35,9 @@ npm-debug.log
 
 /.elixir_ls/
 
-*.beam
+*.beam/
+
+/config/prod.exs
+
+/config/releases.exs
+
