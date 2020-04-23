@@ -1,5 +1,5 @@
 <h3 class="white-text" style="margin-bottom: 3rem; margin-top: 3em">|> update_profile</h3>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :edit, @user)) %>
+<%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
 
 <span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user) %></span>

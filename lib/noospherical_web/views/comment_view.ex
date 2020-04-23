@@ -8,10 +8,22 @@ defmodule NoosphericalWeb.CommentView do
     article.title
   end
 
+  def get_video(id) do
+    video = Noospherical.Repo.get!(Noospherical.Multimedia.Video, id)
+
+    video.title
+  end
+
   def get_article_url(id) do
     article = Noospherical.Repo.get!(Noospherical.Articles.Article, id)
 
     "#{id}-#{article.slug}"
+  end
+
+  def get_video_url(id) do
+    video = Noospherical.Repo.get!(Noospherical.Multimedia.Video, id)
+
+    "#{id}-#{video.slug}"
   end
 
   def gravatar(email) do

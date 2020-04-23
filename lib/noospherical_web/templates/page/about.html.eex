@@ -1,0 +1,53 @@
+<h2 class="white-text" style="margin-top: 3em">~whois</h2>
+
+      <div class="white-text">
+          <div class="row">
+            <div class="col s8">
+
+              <p>
+                I'm a self-taught web developer, in search of jobs or training.
+              </p>
+              <p>
+                Here you'll find all my projects (done or in progress), as well as a few blog posts and videos.
+              </p>
+              <p>
+                <a href="/work" class="btn red darken-2"
+                  >Portfolio</a
+                >
+              </p>
+            </div>
+
+
+            <div class="col s6 right" style="margin-top: 20em">
+              <h2 class="">Skills</h2>
+                <div>
+
+                  <p>|> Elixir / Phoenix</p>
+                  <p>|> HTML / CSS</p>
+                  <p>|> Javascript / Node.js</p>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container left" style="margin-top: 5em">
+          <div class="row">
+
+
+              <form action="#" class="d-flex" class="subscribe">
+                <input
+                  type="text"
+                  class="white-text"
+                  placeholder="name@email.com"
+                />
+                <input
+                  type="submit"
+                  value="Subscribe to newsletter"
+                  class="btn red darken-2"
+                />
+              </form>
+            </div>
+          </div>
+        </div>

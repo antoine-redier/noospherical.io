@@ -6,7 +6,9 @@ defmodule NoosphericalWeb.UserController do
   alias Noospherical.Accounts
   alias Noospherical.Accounts.User
 
-  plug :authenticate_user when action in [:index, :show, :edit]
+  plug :authenticate_user when action in [:show, :edit, :update]
+
+  plug :authenticate_admin when action in [:index, :delete]
 
   def action(conn, _) do
     args = [conn, conn.params, conn.assigns.current_user]

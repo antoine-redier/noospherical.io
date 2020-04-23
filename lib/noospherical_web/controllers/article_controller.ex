@@ -3,10 +3,8 @@ defmodule NoosphericalWeb.ArticleController do
 
   alias Noospherical.Articles
   alias Noospherical.Articles.Article
-  alias Noospherical.Comment
 
-  plug :authenticate_admin when action in [:new, :create, :edit, :update]
-  plug :authenticate_user
+  plug :authenticate_author when action in [:new, :create, :edit, :update, :delete]
   plug :load_categories when action in [:new, :create, :edit, :update]
 
   defp load_categories(conn, _article) do
@@ -54,13 +52,24 @@ defmodule NoosphericalWeb.ArticleController do
   end
 
   def edit(conn, %{"id" => id}, current_user) do
-    article = Articles.get_user_article!(current_user, id)
-    changeset = Articles.change_article(article)
-    render(conn, "edit.html", article: article, changeset: changeset)
+    article = Articles.get_article!(id)
+
+    case article.user_id == current_user.id ||
+           current_user.admin do
+      true ->
+        changeset = Articles.change_article(article)
+        render(conn, "edit.html", article: article, changeset: changeset)
+
+      false ->
+        conn
+        |> put_flash(:error, "Nothing to see here.")
+        |> redirect(to: Routes.page_path(conn, :index))
+        |> halt()
+    end
   end
 
-  def update(conn, %{"id" => id, "article" => article_params}, current_user) do
-    article = Articles.get_user_article!(current_user, id)
+  def update(conn, %{"id" => id, "article" => article_params}, _current_user) do
+    article = Articles.get_article!(id)
 
     case Articles.update_article(article, article_params) do
       {:ok, article} ->
@@ -74,8 +83,19 @@ defmodule NoosphericalWeb.ArticleController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    article = Articles.get_user_article!(current_user, id)
-    {:ok, _article} = Articles.delete_article(article)
+    article = Articles.get_article!(id)
+
+    case article.user_id == current_user.id ||
+           current_user.admin do
+      true ->
+        Articles.delete_article(article)
+
+      false ->
+        conn
+        |> put_flash(:error, "Nothing to see here.")
+        |> redirect(to: Routes.page_path(conn, :index))
+        |> halt()
+    end
 
     conn
     |> put_flash(:info, "Article deleted successfully.")

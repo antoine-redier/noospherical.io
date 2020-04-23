@@ -1,5 +1,4 @@
-
-<%= form_for @comment_changeset, Routes.article_comment_path(@conn, :create, @article), fn f -> %>
+<%= form_for @comment_changeset, Routes.video_comment_path(@conn, :create, @video), fn f -> %>
   <%= label f, :text, "Leave a comment", class: "control-label white-text" %>
   <%= text_input f, :text, class: "form-control white-text" %>
   <%= error_tag f, :text %>

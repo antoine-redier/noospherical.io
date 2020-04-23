@@ -8,30 +8,47 @@
   </li>
 
   <li class="background white" style="padding: 5rem; border-radius: 0 0 20px 0">
-    <strong><%= markdown(@article.body) %></strong>
+    <%= markdown(@article.body) %>
+      <div class="left white-text background black" style="margin-top: 1rem; margin-left: -5rem; font-weight: 600; font-size: 18px">
+    <%= @article.inserted_at %>
+</div>
   </li>
 </ul>
 
-<%= if @current_user.admin do %>
-  <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article), class: "red-text darken-2" %></span>
+<div class="red-text text-darken-2 row">
+<a class="col s2" href="/users/<%=@article.user_id%>">
+
+<div><%= get_user_avatar(@article.user_id) %> </div></a>
+<b class="col s10" style="font-size: 18px; font-weight: 600; border-left: 3px solid #d32f2f">
+<%=get_user_name(@article.user_id)%><br>
+<em style="font-size: 12px; font-weight: 400">@<%=get_user_username(@article.user_id)%></em><br>
+<%= get_user_twitter(@article.user_id) %>
+</b></div>
+
+<%= if (@current_user && @current_user.admin) || (@current_user && @article.user_id == @current_user.id) do %>
+  <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article), class: "red-text darken-2 right" %></span>
 <% end %>
 
-  <span><%= link "Back", to: Routes.article_path(@conn, :index), class: "red-text darken-2" %></span>
 
+  <span><%= link "Back", to: Routes.article_path(@conn, :index), class: "red-text darken-2 right", style: "margin-right: 2rem" %></span>
+
+<%= if @current_user do %>
 <div style="margin-top: 10em; margin-bottom: 3rem"><%= render NoosphericalWeb.CommentView, "new.html", conn: @conn, article: @article, comment_changeset: @comment_changeset %></div>
-
+<%= else %>
+<p class="white-text center" style="font-size: 18px; margin-top: 5rem">You must be <a class="red-text text-darken-2" href="/sessions/new">logged in</a> to post a comment.</p>
+<% end %>
 
 <%= for comment <- @article.comments do %>
 <div class="row">
   <div class="col s12">
-    <div class="card background black" style="border-radius: 6px">
+    <div class="card background transparent" style="box-shadow: none">
       <div class="card-content row">
         <span class="card-title col s2">
           <a href="/users/<%=comment.user_id%>"><%= get_user_avatar(comment.user_id) %></a></span>
-          <span class="card-title col s10 grey-text"><a class="red-text text-darken-2" href="/users/<%=comment.user_id%>"><%= get_user_name(comment.user_id) %></a><em style="font-size: 18px">  @<%= get_user_username(comment.user_id) %></em>
-       <div class="divider col s12"></div>
-          <b class="right" style="font-size: 12px"><%= comment.inserted_at %></b>
-        <br><br><span class="white-text card-content" style="font-size: 18px; overflow-wrap: break-word"><%= comment.text %></span>
+          <span class="card-title col s10 grey-text"><a class="red-text text-darken-2" style="font-size: 20px" href="/users/<%=comment.user_id%>"><%= get_user_name(comment.user_id) %></a><em style="font-size: 18px">  @<%= get_user_username(comment.user_id) %></em>
+       <div class="divider col s12 grey darken-4" style= "border-right: solid 200px white"></div>
+          <b class="right" style="font-size: 11px"><%= comment.inserted_at %></b>
+        <br><br><span class="white-text card-content" style="font-size: 16px; overflow-wrap: break-word"><%= comment.text %></span>
         </span>
       </div>
     </div>

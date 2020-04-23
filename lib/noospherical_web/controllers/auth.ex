@@ -33,7 +33,18 @@ defmodule NoosphericalWeb.Auth do
   end
 
   def authenticate_admin(conn, _opts) do
-    if conn.assigns.current_user.admin do
+    if conn.assigns.current_user && conn.assigns.current_user.admin do
+      conn
+    else
+      conn
+      |> put_flash(:error, "Nothing to see here.")
+      |> redirect(to: Routes.page_path(conn, :index))
+      |> halt()
+    end
+  end
+
+  def authenticate_author(conn, _) do
+    if conn.assigns.current_user && conn.assigns.current_user.author do
       conn
     else
       conn

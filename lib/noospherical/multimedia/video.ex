@@ -15,6 +15,7 @@ defmodule Noospherical.Multimedia.Video do
 
     belongs_to :user, Noospherical.Accounts.User
     belongs_to :category, Noospherical.Articles.Category
+    has_many :video_comments, Noospherical.Multimedia.VideoComment
 
     timestamps()
   end

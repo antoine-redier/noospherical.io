@@ -1,8 +1,12 @@
 
 
  <%= if !@current_user do %>
-    <p class="white-text">You must <%= link "register", class: "red-text text-darken-2", to: Routes.user_path(@conn, :new) %> to get access.</p>
-  <% else %>
-  <div class="row"><%= link "See articles", to: Routes.article_path(@conn, :index), class: "white-text col s6 offset-s3" %>
-   <%= link "See videos", to: Routes.video_path(@conn, :index), class: "white-text col s6" %></div>
+    <p class="white-text center"><%= link "Register", class: "red-text text-darken-2", to: Routes.user_path(@conn, :new) %> or <%= link "log in", class: "red-text text-darken-2", to: Routes.session_path(@conn, :new) %> to get full access.</p>
   <% end %>
+  <div class="center card grey darken-4" style="margin-top: 5em; padding-top: 2rem; padding-bottom: 1rem">
+  <p class="card-content"><%= link "See articles", to: Routes.article_path(@conn, :index), class: "black-text" %></p>
+  <div class="divider black" style="margin-bottom: 2rem"></div>
+  <p class="card-content"> <%= link "See videos", to: Routes.video_path(@conn, :index), class: "black-text" %></p>
+  <div class="divider black" style="margin-bottom: 2rem"></div>
+  <p class="card-content"><%= link "About", to: Routes.page_path(@conn, :about), class: "black-text" %></p></div>
+

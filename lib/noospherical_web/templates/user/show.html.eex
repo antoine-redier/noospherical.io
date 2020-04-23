@@ -3,6 +3,7 @@
 <a class="right valign-wrapper" href="/users/<%=@user.id%>/edit"><i class="material-icons medium white-text">settings</i></a>
 <% end %>
   <%= render "user.html", user: @user %>
+  <%= get_user_twitter(@user.id) %>
 
 </div>
 
