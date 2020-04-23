@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :noospherical, NoosphericalWeb.Endpoint,
-  force_ssl: [hsts: true]
+  force_ssl: [hsts: true],
   url: [host: "noospherical.io", port: 443],
   https: [
     port: 443,
