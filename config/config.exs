@@ -7,16 +7,13 @@
 # General application configuration
 use Mix.Config
 
-config :noospherical,
-  uploads_directory: Path.expand("/home/basilisk/uploads_dev")
-
 # Configures the endpoint
 config :noospherical, NoosphericalWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "mmqYLjPVMkbpB0xeEvKqUSq2HgworEQdedcUJInS1xvk96ediLcdvUs6TzHXA0fw",
+  secret_key_base: "very_secret",
   render_errors: [view: NoosphericalWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Noospherical.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "ci1cGxWn"]
+  live_view: [signing_salt: "salty"]
 
 # Configures Elixir's Logger
 config :logger, :console,

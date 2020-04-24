@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :noospherical, Noospherical.Repo,
   username: "postgres",
-  password: "785236914556saucisse",
+  password: "postgres",
   database: "noospherical_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

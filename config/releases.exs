@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :noospherical, Noospherical.Repo,
   ssl: true,
@@ -26,3 +26,5 @@ config :noospherical, NoosphericalWeb.Endpoint,
 config :logger, level: :info
 
 config :noospherical, NoosphericalWeb.Endpoint, force_ssl: [hsts: true]
+
+config :noospherical, NoosphericalWeb.Endpoint, server: true
