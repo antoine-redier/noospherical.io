@@ -3,10 +3,10 @@
  <%= if !@current_user do %>
     <p class="white-text center"><%= link "Register", class: "red-text text-darken-2", to: Routes.user_path(@conn, :new) %> or <%= link "log in", class: "red-text text-darken-2", to: Routes.session_path(@conn, :new) %> to get full access.</p>
   <% end %>
-  <div class="center card grey darken-4" style="margin-top: 5em; padding-top: 2rem; padding-bottom: 1rem">
-  <p class="card-content"><%= link "See articles", to: Routes.article_path(@conn, :index), class: "black-text" %></p>
+  <div class="center transparent" style="margin-top: 5em; padding-top: 2rem; padding-bottom: 1rem">
+  <p class="card-content"><%= link "ARTICLES", to: Routes.article_path(@conn, :index), class: "white-text left", style: "font-size: 30px; padding: 2rem" %></p>
   <div class="divider black" style="margin-bottom: 2rem"></div>
-  <p class="card-content"> <%= link "See videos", to: Routes.video_path(@conn, :index), class: "black-text" %></p>
+  <p class="card-content"> <%= link "VIDEOS", to: Routes.video_path(@conn, :index), class: "white-text right", style: " font-size: 30px; padding: 1rem; border: 1px solid white" %></p>
   <div class="divider black" style="margin-bottom: 2rem"></div>
-  <p class="card-content"><%= link "About", to: Routes.page_path(@conn, :about), class: "black-text" %></p></div>
+  <p class="card-content"><%= link "ABOUT", to: Routes.page_path(@conn, :about), class: "black-text center background white", style: "font-size: 30px; padding: 2rem" %></p></div>
 

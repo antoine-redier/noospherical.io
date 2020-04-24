@@ -61,7 +61,7 @@
     <li><%= link "Log Out", class: "waves-effet white-text", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %></li>
   </ul>
   <% end %>
-    <video class="responsive-video hide-on-med-and-down" autoplay loop muted width=100% style="margin-top: -8rem; z-index: -1" type="video/mp4" src="https://wedistill.io/uploads/videos/processed/4726/BnW.mp4.mp4"></video>
+    <video class="responsive-video hide-on-med-and-down" autoplay loop muted width=100% style="margin-top: -15em; z-index: -1" type="video/mp4" src="https://wedistill.io/uploads/videos/processed/4726/BnW.mp4.mp4"></video>
         <div class="divider white row" style="width: 500px; margin-top: "></div>
 
 
