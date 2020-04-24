@@ -46,23 +46,36 @@ defmodule NoosphericalWeb.UserController do
     render(conn, "show.html", user: user, current_user: current_user)
   end
 
-  def edit(conn, %{"id" => id}, current_user) do
-    user = Accounts.get_user!(id)
-    changeset = Accounts.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset, current_user: current_user)
+  def edit(conn, %{"id" => uuid}, current_user) do
+    user = Accounts.get_user!(uuid)
+
+    if current_user.uuid == uuid do
+      changeset = Accounts.change_user(user)
+      render(conn, "edit.html", user: user, changeset: changeset, current_user: current_user)
+    else
+      conn
+      |> put_flash(:error, "hissssss")
+      |> redirect(to: Routes.user_path(conn, :show, user))
+    end
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}, _current_user) do
-    user = Accounts.get_user!(id)
+  def update(conn, %{"id" => uuid, "user" => user_params}, current_user) do
+    user = Accounts.get_user!(uuid)
 
-    case Accounts.update_user(user, user_params) do
-      {:ok, user} ->
-        conn
-        |> put_flash(:info, "User updated successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user))
+    if current_user.uuid == uuid do
+      case Accounts.update_user(user, user_params) do
+        {:ok, user} ->
+          conn
+          |> put_flash(:info, "User updated successfully.")
+          |> redirect(to: Routes.user_path(conn, :show, user))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "edit.html", user: user, changeset: changeset)
+      end
+    else
+      conn
+      |> put_flash(:error, "hissssss")
+      |> redirect(to: Routes.user_path(conn, :show, user))
     end
   end
 
