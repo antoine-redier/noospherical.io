@@ -1,18 +1,59 @@
-<h3 class="white-text" style="margin-bottom: 3rem"><%= @video.title %></h3>
+<h3 class="white-text"><%= @video.title %></h3>
 
 <ul>
+<li>
+<iframe src="<%=@video.url%>" width="640" height="480" frameborder="0" allowfullscreen></iframe></li>
 
-  <li><video controls width="100%" height="100%" src="<%=@video.url%>"></video></li>
 
   <li>
-    <em class="red-text text-darken-4" style="font-size: 16px; font-weight: 600">
+    <em class="grey-text video-description">
     <%= @video.description %>
     </em>
   </li>
+   <p class="black-text video-timestamp left">
+    <%= @video.inserted_at %>
+  </p>
 
 </ul>
 
-<%= if @current_user.admin do %>
-<span><%= link "Edit", to: Routes.video_path(@conn, :edit, @video), class: "red-text darken-2" %></span>
+<div class="red-text text-darken-2 row">
+<a class="col s2" href="/users/<%=@video.user_uuid%>">
+<div><%= get_user_avatar(@video.user_uuid) %> </div></a>
+
+<b class="author-name col s10">
+<%=get_user_name(@video.user_uuid)%><br>
+<em class="author-username">@<%=get_user_username(@video.user_uuid)%></em><br>
+<%= get_user_twitter(@video.user_uuid) %>
+</b></div>
+
+<%= if (@current_user && @current_user.admin) || (@current_user && @video.user_uuid == @current_user.uuid) do %>
+<span><%= link "Edit", to: Routes.video_path(@conn, :edit, @video), class: "red-text darken-2 right" %></span>
 <% end %>
-<span><%= link "Back", to: Routes.video_path(@conn, :index), class: "red-text darken-2" %></span>
+<span><%= link "Back", to: Routes.video_path(@conn, :index), class: "red-text darken-2 right", style: "margin-right: 2rem" %></span>
+
+<%= if @current_user do %>
+<div class="comment-input"><%= render NoosphericalWeb.CommentView, "new_vid.html", conn: @conn, video: @video, comment_changeset: @comment_changeset %></div>
+<%= else %>
+<p class="white-text center" style="font-size: 18px; margin-top: 5rem">You must be <a class="red-text text-darken-2" href="/sessions/new">logged in</a> to post a comment.</p>
+<% end %>
+
+
+<%= for comment <- @video.video_comments do %>
+<div class="row">
+  <div class="col s12">
+    <div class="card background transparent">
+      <div class="card-content row">
+        <span class="card-title col s2">
+          <a href="/users/<%=comment.user_uuid%>"><%= get_user_avatar(comment.user_uuid) %></a></span>
+          <span class="card-title col s10 grey-text"><a class="comment-user red-text text-darken-2"  href="/users/<%=comment.user_uuid%>"><%= get_user_name(comment.user_uuid) %></a><em class="comment-name">  @<%= get_user_username(comment.user_uuid) %></em>
+       <div class="divider comment-divider col s12 grey darken-4"></div>
+          <b class="right" style="font-size: 11px"><%= comment.inserted_at %></b>
+        <br><br><span class="white-text comment-text card-content"><%= comment.text %></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% end %>

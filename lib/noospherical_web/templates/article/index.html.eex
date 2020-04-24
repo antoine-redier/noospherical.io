@@ -1,24 +1,31 @@
-<h3 class="white-text" style="margin-bottom: 3rem">Articles</h3>
-
-<table>
-  <tbody>
-<%= for article <- @articles do %>
-    <tr>
-      <td class="white-text" style="font-weight: 600"><%= article.title %></td>
-     <td class="white-text"><em><%= article.body %></em></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.article_path(@conn, :show, article), class: "red-text darken-2" %></span>
-        <%= if @current_user.admin do %>
-        <span><%= link "Edit", to: Routes.article_path(@conn, :edit, article), class: "red-text darken-2" %></span>
-        <span><%= link "Delete", to: Routes.article_path(@conn, :delete, article), method: :delete, data: [confirm: "Are you sure?"], class: "red-text darken-2" %></span>
-      <% end %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<%= if @current_user.admin do %>
-<span><%= link "New Article", to: Routes.article_path(@conn, :new), class: "red-text darken-2" %></span>
-<% end %>
+  <h3 class="white-text">|> list_articles</h3>
+  <%= for article <- @articles do %>
+    <div class="row index-row">
+      <div class="col s12">
+        <div class="card post-card transparent">
+          <div class="card-content white-text">
+            <span class="card-title" style="margin-bottom: 2rem">
+              <%= article.title %>
+              <b style="font-size: 18px"> —
+                <a class="red-text text-darken-2" href="/users/<%=article.user_uuid%>">
+                  <%=get_user_name(article.user_uuid)%>
+                </a>
+              </b>
+            </span>
+            <p class="truncate grey-text" style="font-size: 16px"><em><%= article.body %></em></p>
+          </div>
+          <div class="index-actions card-action right">
+            <a><%= link "Show", to: Routes.article_path(@conn, :show, article), class: "white-text" %></a>
+            <%= if (@current_user && @current_user.admin) || (@current_user && article.user_uuid == @current_user.uuid && @current_user.author) do %>
+              <a><%= link "Edit", to: Routes.article_path(@conn, :edit, article), class: "white-text" %></a>
+              <a><%= link "Delete", to: Routes.article_path(@conn, :delete, article), method: :delete, data: [confirm: "Are you sure?"], class: "white-text" %></a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= if (@current_user && @current_user.admin) || (@current_user && @current_user.author) do %>
+    <span><%= link "New Article", to: Routes.article_path(@conn, :new), class: "red-text darken-2" %></span>
+  <% end %>
+  <div class="center"><%= pagination_links @page, view_style: :materialize %>></div>

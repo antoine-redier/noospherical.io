@@ -12,7 +12,7 @@ defmodule Noospherical.Multimedia do
     Repo.all(Video)
   end
 
-  def get_video!(id), do: Repo.get!(Video, id)
+  def get_video!(id), do: Repo.get_by!(Video, uuid: id)
 
   def create_video(%Accounts.User{} = user, attrs \\ %{}) do
     %Video{}
@@ -44,10 +44,10 @@ defmodule Noospherical.Multimedia do
   def get_user_video!(%Accounts.User{} = user, id) do
     Video
     |> user_videos_query(user)
-    |> Repo.get!(id)
+    |> Repo.get_by!(uuid: id)
   end
 
-  defp user_videos_query(query, %Accounts.User{id: user_id}) do
-    from(v in query, where: v.user_id == ^user_id)
+  defp user_videos_query(query, %Accounts.User{uuid: user_uuid}) do
+    from(v in query, where: v.user_uuid == ^user_uuid)
   end
 end

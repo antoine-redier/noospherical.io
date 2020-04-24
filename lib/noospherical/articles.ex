@@ -5,19 +5,9 @@ defmodule Noospherical.Articles do
 
   import Ecto.Query, warn: false
   alias Noospherical.Repo
+  alias Noospherical.Category
   alias Noospherical.Articles.Article
-  alias Noospherical.Accounts
-  alias Noospherical.Articles.Category
-
-  @doc """
-  Returns the list of articles.
-
-  ## Examples
-
-      iex> list_articles()
-      [%Article{}, ...]
-
-  """
+  alias Noospherical.Accounts.User
 
   def create_category!(name) do
     Repo.insert!(%Category{name: name}, on_conflict: :nothing)
@@ -30,7 +20,7 @@ defmodule Noospherical.Articles do
   end
 
   def list_articles do
-    Repo.all(Article)
+    Repo.paginate(Article)
   end
 
   @doc """
@@ -47,7 +37,7 @@ defmodule Noospherical.Articles do
   ** (Ecto.NoResultsError)
 
   """
-  def get_article!(id), do: Repo.get!(Article, id)
+  def get_article!(id), do: Repo.get_by!(Article, uuid: id)
 
   @doc """
   Creates a article.
@@ -61,7 +51,7 @@ defmodule Noospherical.Articles do
   {:error, %Ecto.Changeset{}}
 
   """
-  def create_article(%Accounts.User{} = user, attrs \\ %{}) do
+  def create_article(%User{} = user, attrs \\ %{}) do
     %Article{}
     |> Article.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:user, user)
@@ -115,19 +105,19 @@ defmodule Noospherical.Articles do
     Article.changeset(article, %{})
   end
 
-  def list_user_articles(%Accounts.User{} = user) do
+  def list_user_articles(%User{} = user) do
     Article
     |> user_articles_query(user)
     |> Repo.all()
   end
 
-  def get_user_article!(%Accounts.User{} = user, id) do
+  def get_user_article!(%User{} = user, id) do
     Article
     |> user_articles_query(user)
     |> Repo.get!(id)
   end
 
-  defp user_articles_query(query, %Accounts.User{id: user_id}) do
-    from(v in query, where: v.user_id == ^user_id)
+  defp user_articles_query(query, %User{uuid: user_uuid}) do
+    from(v in query, where: v.user_uuid == ^user_uuid)
   end
 end

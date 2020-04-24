@@ -11,11 +11,11 @@ defmodule Noospherical.Accounts do
     Repo.all(User)
   end
 
-  def get_user(id) do
-    Repo.get(User, id)
+  def get_user(uuid) do
+    Repo.get_by!(User, uuid: uuid)
   end
 
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(uuid), do: Repo.get_by!(User, uuid: uuid)
 
   def get_user_by(params) do
     Repo.get_by(User, params)

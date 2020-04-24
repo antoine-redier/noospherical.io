@@ -23,7 +23,10 @@ defmodule NoosphericalWeb do
 
       import Plug.Conn
       import NoosphericalWeb.Gettext
-      import NoosphericalWeb.Auth, only: [authenticate_user: 2, authenticate_admin: 2]
+
+      import NoosphericalWeb.Auth,
+        only: [authenticate_user: 2, authenticate_admin: 2, authenticate_author: 2]
+
       alias NoosphericalWeb.Router.Helpers, as: Routes
     end
   end
@@ -39,7 +42,8 @@ defmodule NoosphericalWeb do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
-
+      import NoosphericalWeb.ViewHelpers
+      import Scrivener.HTML
       import NoosphericalWeb.ErrorHelpers
       import NoosphericalWeb.Gettext
       alias NoosphericalWeb.Router.Helpers, as: Routes

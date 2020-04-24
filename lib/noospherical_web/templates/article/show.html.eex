@@ -1,21 +1,64 @@
-<div class="container" style="padding-right: 2rem; border-radius: 40px 0 0 0; border-top: solid 2px white; border-left: solid 2px white; margin-bottom: -1.2rem; height: 100px; width: 100%">
-<h3 class="white-text center" style="margin-bottom: 3rem"><%= @article.title %></h3>
-</div>
-<ul>
-
-  <li class="red-text text-darken-2">
-    <%= @article.category_id %>
-  </li>
-
-  <li class="background white" style="padding: 5rem; border-radius: 0 0 20px 0">
-    <strong><%= markdown(@article.body) %></strong>
-  </li>
-</ul>
-
-<%= if @current_user.admin do %>
-  <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article), class: "red-text darken-2" %></span>
-<% end %>
-  <span><%= link "Back", to: Routes.article_path(@conn, :index), class: "red-text darken-2" %></span>
-
-
-
+  
+  <div class="container article-container">
+    <h3 class="white-text center"><%= @article.title %></h3>
+  </div>
+  <ul>
+    <li class="red-text text-darken-2">
+      <%= @article.category_id %>
+    </li>
+    <li class="article-body">
+      <%= markdown(@article.body) %>
+      <div class="article-timestamp left white-text">
+        <%= @article.inserted_at %>
+      </div>
+    </li>
+  </ul>
+  <div class="red-text text-darken-2 row">
+    <a class="col s2" href="/users/<%=@article.user_uuid%>">
+      <div><%= get_user_avatar(@article.user_uuid) %> </div>
+    </a>
+    <b class="author-name col s10">
+      <%=get_user_name(@article.user_uuid)%><br>
+      <em class="author-username">@<%=get_user_username(@article.user_uuid)%></em><br>
+      <%= get_user_twitter(@article.user_uuid) %>
+    </b></div>
+  <%= if (@current_user && @current_user.admin) || (@current_user && @article.user_uuid == @current_user.uuid) do %>
+    <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article), class: "red-text darken-2 right" %></span>
+  <% end %>
+  <span><%= link "Back", to: Routes.article_path(@conn, :index), class: "red-text darken-2 right", style: "margin-right: 2rem" %></span>
+  <%= if @current_user do %>
+    <div class="comment-input"><%= render NoosphericalWeb.CommentView, "new.html", conn: @conn, article: @article, comment_changeset: @comment_changeset %></div>
+  <%= else %>
+    <p class="white-text center" style="font-size: 18px; margin-top: 10em">You must be <a class="red-text text-darken-2" href="/sessions/new">logged in</a> to post a comment.</p>
+  <% end %>
+  <%= for comment <- @article.comments do %>
+    <div class="row">
+      <div class="col s12">
+        <div class="card background transparent">
+          <div class="card-content row">
+            <span class="card-title col s2">
+              <a href="/users/<%=comment.user_uuid%>">
+                <%= get_user_avatar(comment.user_uuid) %></a>
+            </span>
+            <span class="card-title col s10 grey-text">
+              <a class="comment-user red-text text-darken-2" href="/users/<%=comment.user_uuid%>">
+                <%= get_user_name(comment.user_uuid) %>
+              </a>
+              <em class="comment-name">  @<%= get_user_username(comment.user_uuid) %>
+              </em>
+              <div class="divider comment-divider col s12 grey darken-4">
+              </div>
+              <b class="comment-timestamp right">
+                <%= comment.inserted_at %>
+              </b>
+              <br>
+              <br>
+              <span class="white-text comment-text card-content">
+                <%= comment.text %>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>

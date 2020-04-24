@@ -1,0 +1,41 @@
+  <h4 class="white-text right">|> article_comments</h4>
+  <%= for comment <- @article_comments do %>
+    <div class="row">
+      <div class="col s12">
+        <div class="card transparent">
+          <div class="card-content row">
+            <span class="card-title col s12"><b style="font-size: 23px">
+                <a class="red-text text-darken-4 left" style="font-weight: 600" href="/articles/<%= get_article_url(comment.article_uuid) %>"> <%= get_article(comment.article_uuid) %></a></b>
+              <div class="divider col s12"></div>
+              <b class="right grey-text" style="font-size: 12px"><%= comment.inserted_at %></b>
+              <br>
+              <br>
+              <span class="white-text comment-text card-content"><%= comment.text %></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end %>
+  <div class="center"><%= pagination_links @article_page, view_style: :materialize %>></div>
+  <div class="divider transparent" style="margin-top: 5rem"></div>
+  <h4 class="white-text left">|> video_comments</h4>
+  <%= for comment <- @video_comments do %>
+    <div class="row">
+      <div class="col s12">
+        <div class="card background black">
+          <div class="card-content row">
+            <span class="card-title col s12"><b style="font-size: 23px">
+                <a class="red-text text-darken-4 right"  style="font-weight: 600" href="/videos/<%= get_video_url(comment.video_uuid) %>"> <%= get_video(comment.video_uuid) %></a></b>
+              <div class="divider col s12 grey darken-4"></div>
+              <b class="right grey-text" style="font-size: 12px"><%= comment.inserted_at %></b>
+              <br>
+              <br>
+              <span class="white-text comment-text card-content"><%= comment.text %></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end %>
+  <div class="center"><%= pagination_links @video_page, view_style: :materialize %>></div>

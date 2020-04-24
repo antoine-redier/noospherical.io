@@ -4,8 +4,7 @@ defmodule NoosphericalWeb.ArticleController do
   alias Noospherical.Articles
   alias Noospherical.Articles.Article
 
-  plug :authenticate_admin when action in [:new, :create, :edit, :update]
-  plug :authenticate_user
+  plug :authenticate_author when action in [:new, :create, :edit, :update, :delete]
   plug :load_categories when action in [:new, :create, :edit, :update]
 
   defp load_categories(conn, _article) do
@@ -17,9 +16,12 @@ defmodule NoosphericalWeb.ArticleController do
     apply(__MODULE__, action_name(conn), args)
   end
 
-  def index(conn, _params, _current_user) do
-    articles = Articles.list_articles()
-    render(conn, "index.html", articles: articles)
+  def index(conn, params, _current_user) do
+    page =
+      Articles.Article
+      |> Noospherical.Repo.paginate(params)
+
+    render(conn, "index.html", articles: page.entries, page: page)
   end
 
   def new(conn, _params, _current_user) do
@@ -40,19 +42,34 @@ defmodule NoosphericalWeb.ArticleController do
   end
 
   def show(conn, %{"id" => id}, _current_user) do
-    article = Articles.get_article!(id)
+    article =
+      Articles.get_article!(id)
+      |> Noospherical.Repo.preload(:comments)
 
-    render(conn, "show.html", article: article)
+    comment_changeset = Articles.Comment.changeset(%Articles.Comment{})
+
+    render(conn, "show.html", article: article, comment_changeset: comment_changeset)
   end
 
   def edit(conn, %{"id" => id}, current_user) do
-    article = Articles.get_user_article!(current_user, id)
-    changeset = Articles.change_article(article)
-    render(conn, "edit.html", article: article, changeset: changeset)
+    article = Articles.get_article!(id)
+
+    case article.user_uuid == current_user.uuid ||
+           current_user.admin do
+      true ->
+        changeset = Articles.change_article(article)
+        render(conn, "edit.html", article: article, changeset: changeset)
+
+      false ->
+        conn
+        |> put_flash(:error, "Nothing to see here.")
+        |> redirect(to: Routes.page_path(conn, :index))
+        |> halt()
+    end
   end
 
-  def update(conn, %{"id" => id, "article" => article_params}, current_user) do
-    article = Articles.get_user_article!(current_user, id)
+  def update(conn, %{"id" => id, "article" => article_params}, _current_user) do
+    article = Articles.get_article!(id)
 
     case Articles.update_article(article, article_params) do
       {:ok, article} ->
@@ -66,8 +83,19 @@ defmodule NoosphericalWeb.ArticleController do
   end
 
   def delete(conn, %{"id" => id}, current_user) do
-    article = Articles.get_user_article!(current_user, id)
-    {:ok, _article} = Articles.delete_article(article)
+    article = Articles.get_article!(id)
+
+    case article.user_uuid == current_user.uuid ||
+           current_user.admin do
+      true ->
+        Articles.delete_article(article)
+
+      false ->
+        conn
+        |> put_flash(:error, "Nothing to see here.")
+        |> redirect(to: Routes.page_path(conn, :index))
+        |> halt()
+    end
 
     conn
     |> put_flash(:info, "Article deleted successfully.")
