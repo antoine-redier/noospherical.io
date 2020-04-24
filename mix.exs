@@ -4,7 +4,7 @@ defmodule Noospherical.MixProject do
   def project do
     [
       app: :noospherical,
-      version: "0.1.0",
+      version: String.trim(File.read!("./VERSION")),
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -46,7 +46,8 @@ defmodule Noospherical.MixProject do
       {:pbkdf2_elixir, "~> 1.0"},
       {:earmark, "~> 1.4.3"},
       {:scrivener_ecto, "~> 2.3"},
-      {:scrivener_html, "~> 1.8"}
+      {:scrivener_html, "~> 1.8"},
+      {:eliver, "~> 2.0.0", only: :dev}
     ]
   end
 
