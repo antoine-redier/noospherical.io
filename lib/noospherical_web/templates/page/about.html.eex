@@ -1,4 +1,4 @@
-<h2 class="white-text" style="margin-top: 3em">~whois</h2>
+<h3 class="white-text">~whois</h2>
 
       <div class="white-text">
           <div class="row">
@@ -19,7 +19,7 @@
 
 
             <div class="col s6 right" style="margin-top: 20em">
-              <h2 class="">Skills</h2>
+              <h3>^skills</h3>
                 <div>
 
                   <p>|> Elixir / Phoenix</p>

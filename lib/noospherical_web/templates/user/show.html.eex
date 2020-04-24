@@ -8,4 +8,4 @@
 </div>
 
 
-<h4 style="margin-top: 5rem; margin-bottom: 3rem" class="right"><%= link "See comments", to: Routes.user_comment_path(@conn, :index, @user.uuid), class: "red-text col s6 text-darken-2" %></h4>
+<h4 class="right"><%= link "See comments", to: Routes.user_comment_path(@conn, :index, @user.uuid), class: "red-text col s6 text-darken-2" %></h4>

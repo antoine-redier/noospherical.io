@@ -1,4 +1,4 @@
-defmodule Noospherical.Articles.Category do
+defmodule Noospherical.Category do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query

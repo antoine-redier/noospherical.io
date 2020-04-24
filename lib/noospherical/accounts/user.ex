@@ -1,5 +1,4 @@
 defmodule Noospherical.Accounts.User do
-  @derive {Jason.Encoder, only: [:comments]}
   use Noospherical.Schema
   import Ecto.Changeset
 
@@ -16,7 +15,8 @@ defmodule Noospherical.Accounts.User do
     field :author, :boolean, default: false
 
     has_many :articles, Noospherical.Articles.Article
-    has_many :comments, Noospherical.Comment
+    has_many :comments, Noospherical.Articles.Comment
+    has_many :video_comments, Noospherical.Multimedia.VideoComment
 
     timestamps()
   end

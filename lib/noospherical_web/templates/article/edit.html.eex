@@ -1,5 +1,3 @@
-<h3 class="white-text" style="margin-bottom: 3rem; margin-top: 3em">Edit Article</h3>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.article_path(@conn, :update, @article)) %>
-
-<span><%= link "Back", to: Routes.article_path(@conn, :index) %></span>
+  <h3 class="white-text">|> update_article</h3>
+  <%= render "form.html", Map.put(assigns, :action, Routes.article_path(@conn, :update, @article)) %>
+  <span><%= link "Back", to: Routes.article_path(@conn, :index) %></span>

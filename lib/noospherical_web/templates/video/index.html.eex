@@ -1,16 +1,16 @@
-<h3 style="margin-bottom: 3em; margin-top: 3em" class="white-text">All <strong>Videos<strong></h3>
+<h3 class="white-text">|> list_videos</h3>
 
 <%= for video <- @videos do %>
 
- <div class="row" style="margin-bottom: 5em">
+ <div class="row index-row">
     <div class="col s12">
-      <div class="card transparent" style="border-left: 7px solid #212121; box-shadow: none">
+      <div class="card post-card transparent">
         <div class="card-content white-text">
           <span class="card-title" style="margin-bottom: 2rem"><%= video.title %><b style="font-size: 18px"> — <a class="red-text text-darken-2" href="/users/<%=video.user_uuid%>"><%=get_user_name(video.user_uuid)%></a></b></span>
           <p class="truncate grey-text" style="font-size: 16px"><%= video.description %>
           </p>
         </div>
-        <div class="card-action transparent right" style="border-top: 0px; font-size: 20px; font-weight: 600">
+        <div class="card-action index-actions right">
           <a><%= link "Watch", to: Routes.video_path(@conn, :show, video), class: "white-text"%></a>
 
           <%= if (@current_user && @current_user.admin) || (@current_user && video.user_uuid == @current_user.uuid) do %>

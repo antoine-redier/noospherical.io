@@ -1,4 +1,4 @@
-defmodule Noospherical.Comment do
+defmodule Noospherical.Articles.Comment do
   use Noospherical.Schema
   import Ecto.Changeset
 
