@@ -4,7 +4,7 @@ defmodule Noospherical.MixProject do
   def project do
     [
       app: :noospherical,
-      version: String.trim(File.read!("./VERSION")),
+      version: String.trim(File.read!("VERSION")),
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
