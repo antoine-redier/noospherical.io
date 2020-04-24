@@ -1,26 +1,31 @@
-<h2 class="white-text">All <strong>Videos<strong></h2>
+<h3 style="margin-bottom: 3em; margin-top: 3em" class="white-text">All <strong>Videos<strong></h3>
 
-<table class="white-text">
-  <tbody>
 <%= for video <- @videos do %>
-    <tr>
 
-      <td><%= video.title %></td>
-      <td><%= video.description %></td>
-      <td><%= link "Watch", to: Routes.video_path(@conn, :show, video), class: "red-text text-darken-2"%></td>
+ <div class="row" style="margin-bottom: 5em">
+    <div class="col s12">
+      <div class="card transparent" style="border-left: 7px solid #212121; box-shadow: none">
+        <div class="card-content white-text">
+          <span class="card-title" style="margin-bottom: 2rem"><%= video.title %><b style="font-size: 18px"> — <a class="red-text text-darken-2" href="/users/<%=video.user_uuid%>"><%=get_user_name(video.user_uuid)%></a></b></span>
+          <p class="truncate grey-text" style="font-size: 16px"><%= video.description %>
+          </p>
+        </div>
+        <div class="card-action transparent right" style="border-top: 0px; font-size: 20px; font-weight: 600">
+          <a><%= link "Watch", to: Routes.video_path(@conn, :show, video), class: "white-text"%></a>
 
-      <td>
+          <%= if (@current_user && @current_user.admin) || (@current_user && video.user_uuid == @current_user.uuid) do %>
+          <a><%= link "Edit", to: Routes.video_path(@conn, :edit, video), class: "white-text" %></a>
+          <a><%= link "Delete", to: Routes.video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"], class: "white-text" %></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <%= if @current_user.admin do %>
-        <span><%= link "Edit", to: Routes.video_path(@conn, :edit, video), class: "red-text text-darken-2" %></span>
-        <span><%= link "Delete", to: Routes.video_path(@conn, :delete, video), method: :delete, data: [confirm: "Are you sure?"], class: "red-text text-darken-2" %></span>
-        <% end %>
-      </td>
-    </tr>
 <% end %>
-  </tbody>
-</table>
 
-<%= if @current_user.admin do %>
+<%= if (@current_user && @current_user.admin) || (@current_user && @current_user.author) do %>
 <span><%= link "New Video", to: Routes.video_path(@conn, :new), class: "red-text text-darken-2" %></span>
 <% end %>
+
+<div class="center"><%= pagination_links @page, view_style: :materialize %>></div>

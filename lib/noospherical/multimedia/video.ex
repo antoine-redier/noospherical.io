@@ -1,20 +1,19 @@
 defmodule Noospherical.Multimedia.Video do
-  use Ecto.Schema
+  use Noospherical.Schema
   import Ecto.Changeset
 
-  def upload_directory do
-    Application.get_env(:noospherical, :uploads_directory)
-  end
-
-  @primary_key {:id, Noospherical.Permalink, autogenerate: true}
   schema "videos" do
     field :url, :string
     field :description, :string
     field :slug, :string
     field :title, :string
 
-    belongs_to :user, Noospherical.Accounts.User
+    belongs_to :user, Noospherical.Accounts.User,
+      foreign_key: :user_uuid,
+      references: :uuid
+
     belongs_to :category, Noospherical.Articles.Category
+    has_many :video_comments, Noospherical.Multimedia.VideoComment
 
     timestamps()
   end
@@ -29,8 +28,8 @@ defmodule Noospherical.Multimedia.Video do
       :category_id
     ])
     |> validate_required([:title, :description, :url])
+    |> foreign_key_constraint(:user_uuid)
     |> assoc_constraint(:category)
-    |> slugify_title()
   end
 
   defp slugify_title(changeset) do
@@ -44,10 +43,5 @@ defmodule Noospherical.Multimedia.Video do
     str
     |> String.downcase()
     |> String.replace(~r/[^\w-]+/u, "-")
-  end
-
-  def local_path(id, title) do
-    [upload_directory(), "#{id}"]
-    |> Path.join()
   end
 end

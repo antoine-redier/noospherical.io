@@ -23,7 +23,10 @@ defmodule NoosphericalWeb do
 
       import Plug.Conn
       import NoosphericalWeb.Gettext
-      import NoosphericalWeb.Auth, only: [authenticate_user: 2, authenticate_admin: 2]
+
+      import NoosphericalWeb.Auth,
+        only: [authenticate_user: 2, authenticate_admin: 2, authenticate_author: 2]
+
       alias NoosphericalWeb.Router.Helpers, as: Routes
     end
   end

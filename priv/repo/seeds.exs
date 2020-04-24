@@ -13,6 +13,6 @@
 alias Noospherical.Articles
 alias Noospherical.Accounts
 
-for category <- ~w(Random) do
+for category <- ~w(Random Self-Improvement Tech Society Culture) do
   Articles.create_category!(category)
 end

@@ -18,17 +18,25 @@ defmodule NoosphericalWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/about", PageController, :about
 
-    resources "/users", UserController, only: [:show, :new, :create]
+    resources "/users", UserController do
+      resources "/comments", CommentController, only: [:index]
+    end
+
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
-    resources "/articles", ArticleController
+    resources "/articles", ArticleController do
+      resources "/comments", CommentController, only: [:create]
+    end
 
-    resources "/videos", VideoController
+    resources "/videos", VideoController do
+      resources "/comments", CommentController, only: [:create]
+    end
   end
 
   scope "/manage", NoosphericalWeb.Auth do
-    pipe_through [:browser, :authenticate_user, :authenticate_admin]
+    pipe_through [:browser, :authenticate_user, :authenticate_admin, :authenticate_author]
   end
 
   # Other scopes may use custom stacks.
