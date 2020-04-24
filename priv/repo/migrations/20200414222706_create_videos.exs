@@ -7,7 +7,6 @@ defmodule Noospherical.Repo.Migrations.CreateVideos do
       add :url, :string
       add :title, :string
       add :description, :text
-      add :slug, :string
 
       add :user_uuid, references(:users, type: :uuid, column: :uuid, on_delete: :nothing)
       add :category_id, references(:categories)

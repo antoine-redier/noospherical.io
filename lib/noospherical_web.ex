@@ -42,7 +42,8 @@ defmodule NoosphericalWeb do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
-
+      import NoosphericalWeb.ViewHelpers
+      import Scrivener.HTML
       import NoosphericalWeb.ErrorHelpers
       import NoosphericalWeb.Gettext
       alias NoosphericalWeb.Router.Helpers, as: Routes

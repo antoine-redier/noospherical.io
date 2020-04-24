@@ -1,13 +1,132 @@
 /* This file is for your main application css. */
- body {
+body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: #050505;
 }
 
 main {
     flex: 1 0 auto;
 }
+
+
+h4 {
+    margin-bottom: 5rem; 
+    margin-top: 3em
+}
+
+footer {
+    margin-top: 10em; 
+    border-top: 1px solid #212121;
+}
+
+.input-field {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.post-card {
+    border-left: 7px solid #212121; 
+    box-shadow: none;
+}
+
+.index-row {
+    margin-bottom: 5em;
+}
+
+.index-actions {
+    border-top: 0px;
+    font-size: 20px; 
+    font-weight: 600;
+    background: none;
+}
+
+.article-container {
+    padding-right: 2rem; 
+    border-radius: 40px 0 0 0; 
+    border-top: solid 2px white; 
+    border-left: solid 2px white; 
+    margin-bottom: -1.2rem; 
+    margin-top: 5em; 
+    height: 100px; 
+    width: 100%;
+}
+
+.article-body {
+    padding: 5rem; 
+    border-radius: 0 0 20px 0;
+    background-color: white;
+}
+
+.article-timestamp {
+    margin-top: 1rem; 
+    margin-left: -5rem; 
+    font-weight: 600; 
+    font-size: 18px;
+    background-color: black;
+}
+
+.video-timestamp {
+    font-weight: 600; 
+    font-size: 18px; 
+    margin-bottom: 2em; 
+    margin-right: 5em;
+    background-color: white;
+}
+
+.video-description {
+    font-size: 16px;
+}
+
+.author-name {
+    font-size: 18px; 
+    font-weight: 600; 
+    border-left: 3px solid #d32f2f;
+}
+
+.author-username {
+    font-size: 12px; 
+    font-weight: 400;
+}
+
+.comment-input {
+    margin-top: 10em; 
+    margin-bottom: 3rem;
+}
+
+.card {
+    box-shadow: none;
+}
+
+.comment-user {
+    font-size: 20px;
+}
+
+.comment-name {
+    font-size: 18px;
+}
+
+.comment-divider {
+    border-right: solid 200px white;
+}
+
+.comment-timestamp {
+    font-size: 11px;
+}
+
+.comment-text {
+    font-size: 16px; 
+    overflow-wrap: break-word;
+}
+
+.landpg-placeholder {
+    margin-top: 5em; 
+    padding-top: 2rem; 
+    padding-bottom: 1rem;
+    background: none;
+}
+
 
 @import "./phoenix.css";
 

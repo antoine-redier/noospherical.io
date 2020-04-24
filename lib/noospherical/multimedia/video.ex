@@ -12,7 +12,7 @@ defmodule Noospherical.Multimedia.Video do
       foreign_key: :user_uuid,
       references: :uuid
 
-    belongs_to :category, Noospherical.Articles.Category
+    belongs_to :category, Noospherical.Category
     has_many :video_comments, Noospherical.Multimedia.VideoComment
 
     timestamps()
@@ -30,18 +30,5 @@ defmodule Noospherical.Multimedia.Video do
     |> validate_required([:title, :description, :url])
     |> foreign_key_constraint(:user_uuid)
     |> assoc_constraint(:category)
-  end
-
-  defp slugify_title(changeset) do
-    case fetch_change(changeset, :title) do
-      {:ok, new_title} -> put_change(changeset, :slug, slugify(new_title))
-      :error -> changeset
-    end
-  end
-
-  defp slugify(str) do
-    str
-    |> String.downcase()
-    |> String.replace(~r/[^\w-]+/u, "-")
   end
 end

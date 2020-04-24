@@ -5,7 +5,8 @@ defmodule Noospherical.Articles do
 
   import Ecto.Query, warn: false
   alias Noospherical.Repo
-  alias Noospherical.Articles.{Article, Comment, Category}
+  alias Noospherical.Category
+  alias Noospherical.Articles.Article
   alias Noospherical.Accounts.User
 
   def create_category!(name) do

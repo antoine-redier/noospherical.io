@@ -1,97 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;display=swap" rel="stylesheet">
-    <title><%= assigns[:page_title] || "noospherical.io" %></title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <%= csrf_meta_tag() %>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;display=swap" rel="stylesheet">
+      <title><%= assigns[:page_title] || "noospherical.io" %></title>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+      <%= csrf_meta_tag() %>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       <script>
-      <%= if @conn.assigns.current_user do %>
-        window.userToken = "<%= Phoenix.Token.sign(NoosphericalWeb.Endpoint, "key", @conn.assigns.current_user.uuid) %>"
-      <% end %>
-    </script>
-  </head>
-  <body style="background-color: #050505">
-    <nav class="navbar transparent" style="box-shadow: none">
-      <div class="nav-wrapper container">
-      <div class="left">
-      <a href="/" class="brand-logo left" style="font-weight: 600">noospherical.io</a>
-      </div>
-        <ul class="right">
-          <%= if @current_user do %>
-          <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large white-text"><i class="material-icons">menu</i></a></li>
-        <li class="hide-on-med-and-down">
-          </li>
-          <% else %>
+        <%= if @conn.assigns.current_user do %>
+          window.userToken = "<%= Phoenix.Token.sign(NoosphericalWeb.Endpoint, "key", @conn.assigns.current_user.uuid) %>"
+        <% end %>
+      </script>
+    </head>
+    <body>
+      <nav class="navbar transparent" style="box-shadow: none">
+        <div class="nav-wrapper container">
+          <div class="left">
+            <a href="/" class="brand-logo left" style="font-weight: 600">noospherical.io</a>
+          </div>
+          <ul class="right">
+            <%= if @current_user do %>
+              <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large white-text"><i class="material-icons">menu</i></a></li>
+              <li class="hide-on-med-and-down">
+              </li>
+            <% else %>
+              <li>
+                <%= link "Register", to: Routes.user_path(@conn, :new) %>
+              </li>
+              <li>
+                <%= link "Sign in", to: Routes.session_path(@conn, :new) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+      <%= if @current_user do %>
+        <ul id="slide-out" class="sidenav grey darken-4">
           <li>
-            <%= link "Register", to: Routes.user_path(@conn, :new) %>
+            <div class="user-view">
+              <div class="background red darken-1">
+              </div>
+              <a class="right" href="/users/<%=@current_user.uuid%>/edit"><i class="material-icons white-text">settings</i></a>
+              <a href="/users/<%= @current_user.uuid  %>"><img class="circle" src="<%=gravatar(@current_user.email) %>"></a>
+              <a href="/users/<%= @current_user.uuid  %>"><span class="white-text name"><%= @current_user.name %></span></a>
+              <div class="white-text email"><%=@current_user.email%></div>
+            </div>
           </li>
+          <li><a href="/articles" class="white-text"><i class="material-icons red-text">format_align_center</i>Articles</a></li>
+          <li><a href="/videos" class="white-text"><i class="material-icons red-text">movie_creation</i>Videos</a></li>
           <li>
-            <%= link "Sign in", to: Routes.session_path(@conn, :new) %>
+            <div class="divider"></div>
           </li>
-          <% end %>
+          <li><%= link "About", class: "waves-effet white-text", to: Routes.page_path(@conn, :about)%></li>
+          <li><%= link "Log Out", class: "waves-effet white-text", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %></li>
         </ul>
-      </div>
-    </nav>
-    <%= if @current_user do %>
-    <ul id="slide-out" class="sidenav grey darken-4">
-    <li><div class="user-view">
-      <div class="background red darken-1">
-      </div>
-      <a class="right" href="/users/<%=@current_user.uuid%>/edit"><i class="material-icons white-text">settings</i></a>
-      <a href="/users/<%= @current_user.uuid  %>"><img class="circle" src="<%=gravatar(@current_user.email) %>"></a>
-      <a href="/users/<%= @current_user.uuid  %>"><span class="white-text name"><%= @current_user.name %></span></a>
-      <div class="white-text email"><%=@current_user.email%></div>
-    </div></li>
-
-    <li><a href="/articles" class="white-text"><i class="material-icons red-text">format_align_center</i>Articles</a></li>
-
-    <li><a href="/videos" class="white-text"><i class="material-icons red-text">movie_creation</i>Videos</a></li>
-
-    <li><div class="divider"></div></li>
-
-    <li><%= link "About", class: "waves-effet white-text", to: Routes.page_path(@conn, :about)%></li>
-
-    <li><%= link "Log Out", class: "waves-effet white-text", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %></li>
-  </ul>
-  <% end %>
-    <video class="responsive-video hide-on-med-and-down" autoplay loop muted width=100% style="margin-top: -15em; z-index: -1" type="video/mp4" src="https://wedistill.io/uploads/videos/processed/4726/BnW.mp4.mp4"></video>
-        <div class="divider white row" style="width: 500px; margin-top: "></div>
-
-
-    <main role="main" class="container" style="margin-top: 3em">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= render @view_module, @view_template, assigns %>
-    </main>
-
-      <footer class="page-footer background black" style="margin-top: 10em; border-top: 1px solid #212121">
-
-
-          <div class="footer-copyright">
-            <div class="container center white-text" style="font-size: 18px">
+      <% end %>
+      <video class="responsive-video hide-on-med-and-down" autoplay loop muted width=100% style="margin-top: -15em; z-index: -1" type="video/mp4" src="https://wedistill.io/uploads/videos/processed/4726/BnW.mp4.mp4"></video>
+      <div class="divider white row" style="width: 500px"></div>
+      <main role="main" class="container" style="margin-top: 3em">
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+      <footer class="page-footer background black">
+        <div class="footer-copyright">
+          <div class="container center white-text" style="font-size: 18px">
             © 2020 by Antoine Redier. All rights reserved.
             <a class="grey-text text-lighten-4 right" href="/about">About</a>
-            </div>
           </div>
-        </footer>
-
+        </div>
+      </footer>
+    </body>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-
     <script>
-       document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.sidenav');
-        var options = {}
-        var instances = M.Sidenav.init(elems, options);
-  });
+      document.addEventListener('DOMContentLoaded', function() {
+       var elems = document.querySelectorAll('.sidenav');
+       var options = {}
+       var instances = M.Sidenav.init(elems, options);
+        });
     </script>
-  </body>
-
-
-</html>
+  </html>

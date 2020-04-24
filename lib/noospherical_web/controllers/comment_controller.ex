@@ -4,6 +4,7 @@ defmodule NoosphericalWeb.CommentController do
   import Ecto.Query
 
   alias Noospherical.Articles
+  alias Noospherical.Articles.Comment
 
   def create(conn, %{"comment" => comment_params, "article_id" => article_uuid}) do
     article = Noospherical.Repo.get_by!(Articles.Article, uuid: article_uuid)
@@ -39,13 +40,13 @@ defmodule NoosphericalWeb.CommentController do
 
   def index(conn, %{"user_id" => user_uuid} = params) do
     article_page =
-      Ecto.Query.from(c in Noospherical.Comment,
+      from(c in Comment,
         where: c.user_uuid == ^user_uuid
       )
       |> Noospherical.Repo.paginate(params)
 
     video_page =
-      Ecto.Query.from(c in Noospherical.Multimedia.VideoComment,
+      from(c in Noospherical.Multimedia.VideoComment,
         where: c.user_uuid == ^user_uuid
       )
       |> Noospherical.Repo.paginate(params)

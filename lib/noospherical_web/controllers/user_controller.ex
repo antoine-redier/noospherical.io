@@ -1,8 +1,6 @@
 defmodule NoosphericalWeb.UserController do
   use NoosphericalWeb, :controller
 
-  import Ecto.Query
-
   alias Noospherical.Accounts
   alias Noospherical.Accounts.User
 

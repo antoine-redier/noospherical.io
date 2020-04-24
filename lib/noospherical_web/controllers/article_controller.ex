@@ -46,7 +46,7 @@ defmodule NoosphericalWeb.ArticleController do
       Articles.get_article!(id)
       |> Noospherical.Repo.preload(:comments)
 
-    comment_changeset = Noospherical.Comment.changeset(%Noospherical.Comment{})
+    comment_changeset = Articles.Comment.changeset(%Articles.Comment{})
 
     render(conn, "show.html", article: article, comment_changeset: comment_changeset)
   end
