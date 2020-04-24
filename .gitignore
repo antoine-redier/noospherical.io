@@ -37,9 +37,5 @@ npm-debug.log
 
 *.beam/
 
-/config/prod.exs
 
-/config/releases.exs
-
-/config/dev.exs
 
