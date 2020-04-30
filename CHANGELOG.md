@@ -10,7 +10,7 @@
 * Enhanced user profile; separate forms for profile infos and settings
 * Mailgun API integration for mailing: welcome and forgotten password emails
 * Better registration forms: password confirm, better datepicker...
-
+ 
 ## 0.1.1
 
 * Refactoring
