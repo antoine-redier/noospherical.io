@@ -1,0 +1,52 @@
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var options = {}
+      var instances = M.FormSelect.init(elems, options);
+    });
+      var instance = M.FormSelect.getInstance(elem);
+    
+    instance.getSelectedValues()
+  </script>
+  <div class="row" style="margin-bottom: 3rem"><%= form_for @changeset, @action, fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger" style="font-size: 20px; margin-bottom: 3rem">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+    <div class="input-field col s7">
+      <%= text_input f, :name, class: "validate white-text", type: "text", id: "name" %>
+      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :name %></div>
+      <label class="white-text" for="name">Display Name</label>
+    </div>
+    <div class="divider grey darken-4 col s12 " style="margin: 2rem"></div>
+    <div class="input-field col s12 right">
+      <%= textarea f, :bio, type: "text", class: "validate materialize-textarea white-text", id: "bio", placeholder: "Add a short description..." %>
+      <div class="error-tag"><%= error_tag f, :bio %></div>
+      <label class="white-text"  for="bio">Biography</label>
+    </div>
+    <div class="divider grey darken-4 col s12 left" style="margin: 2rem"></div>
+    <div class="input-field col s9">
+      <%= text_input f, :gender, class: "validate white-text", type: "text", id: "gender" %>
+      <div class="error-tag"><%= error_tag f, :gender %></div>
+      <label class="white-text"  for="gender">Gender</label>
+    </div>
+    <div class="input-field col s9">
+      <%= date_input f, :age, class: "validate white-text", id: "age", placeholder: "" %>
+      <div class="error-tag"><%= error_tag f, :age %></div>
+      <label class="white-text"  for="age">Birthdate</label>
+    </div>
+    <div class="input-field col s9">
+      <%= text_input f, :twitter, class: "validate white-text", id: "twitter", placeholder: "@username" %>
+      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :twitter %></div>
+      <label class="white-text"  for="twitter">@twitter</label>
+    </div>
+    <div class="input-field col s12 white-text">
+      <%= select f, :private, ["Private": true, "Public": false], class: "validate white-text" %>
+      <%= label f, "Profile accessibility", class: "white-text" %>
+    </div>
+    <div class="col s12">
+      <%= submit "Submit", class: "col s6 btn red darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
+    </div>
+  </div>
+<% end %>

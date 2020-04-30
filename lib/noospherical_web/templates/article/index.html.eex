@@ -1,4 +1,7 @@
-  <h3 class="white-text">|> list_articles</h3>
+  
+  <h3 class="white-text center">|> list_articles</h3>
+  <div class="divider grey darken-4 header-divider"></div>
+  <div class="divider transparent whitespace"></div>
   <%= for article <- @articles do %>
     <div class="row index-row">
       <div class="col s12">
@@ -12,7 +15,7 @@
                 </a>
               </b>
             </span>
-            <p class="truncate grey-text" style="font-size: 16px"><em><%= article.body %></em></p>
+            <p class="truncate grey-text" style="font-size: 16px"><em><%= article.description %></em></p>
           </div>
           <div class="index-actions card-action right">
             <a><%= link "Show", to: Routes.article_path(@conn, :show, article), class: "white-text" %></a>

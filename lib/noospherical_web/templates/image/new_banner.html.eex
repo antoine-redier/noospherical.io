@@ -1,0 +1,15 @@
+  
+  <div class="background grey darken-4 banner-form-container">
+    <%= form_for @image_changeset, Routes.image_create_banner_path(@conn, :create_banner, @current_user), [multipart: true], fn f -> %>
+    <label class="white-text">Banner</label>
+    <div class="file-field input-field col s6">
+      <%= file_input f, :image, class: "btn validate"%>
+      <div class="file-path-wrapper">
+        <input class="file-path validate white-text" type="text" placeholder="(1500x500 recommended - gif, png, jpg accepted)">
+      </div>
+      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :image %></div>
+    </div>
+    <div class="form-group col">
+      <%= submit "upload", class: "btn red darken-2 left" %> </div>
+  <% end %>
+</div>

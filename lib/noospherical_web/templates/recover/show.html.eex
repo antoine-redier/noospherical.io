@@ -1,0 +1,26 @@
+  
+  <h3 class="white-text center">|> new_pass</h3>
+  <div class="divider grey darken-4 header-divider"></div>
+  <div class="divider transparent whitespace"></div>
+  <div class="row"><%= form_for @changeset, Routes.user_path(@conn, :update, @user), fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger" style="font-size: 20px; margin-bottom: 3rem">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+    <div class="input-field col s12">
+      <%= password_input f, :password, class: "validate white-text", type: "password", id: "password" %>
+      <div class="error-tag"><%= error_tag f, :password %></div>
+      <label class="white-text"  for="password">Password *</label>
+    </div>
+    <div class="input-field col s12">
+      <%= password_input f, :password_confirmation, class: "validate white-text", type: "password", id: "password-confirmation" %>
+      <div class="error-tag"><%= error_tag f, :password_confirmation %></div>
+      <label class="white-text"  for="password-confirmation">Confirm Password *</label>
+    </div>
+    <div class="divider grey darken-4 col s12 left" style="margin: 2rem"></div>
+    <div class="col s12">
+      <%= submit "Submit", class: "col s6 btn red darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
+    </div>
+  </div>
+<% end %>

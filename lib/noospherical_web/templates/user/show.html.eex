@@ -1,11 +1,42 @@
-<div style="font-family: 'Lato'; margin-top: 3em">
-<%= if @user.uuid == @current_user.uuid do %>
-<a class="right valign-wrapper" href="/users/<%=@user.uuid%>/edit"><i class="material-icons medium white-text">settings</i></a>
-<% end %>
-  <%= render "user.html", user: @user %>
-  <%= get_user_twitter(@user.uuid) %>
-
+  
+  <div class="card user-card background transparent">
+    <%= get_user_banner(@user.uuid) %>
+    <div style="margin-left: 2rem; margin-top: -75px;">
+      <%= get_user_avatar(@user.uuid) %>
+      <h4 class="white-text right" style="margin-right: 1rem"> <strong style="margin-bottom: 3rem; font-weight: 600; margin-top: -5rem">  <%= @user.name %> </strong>
+        <b class="red-text text-darken-4" style="font-weight: 400; font-size: 20px"> @<%= @user.username %> </b>
+        <%= if @user.uuid == @current_user.uuid do %>
+          <br>
+          <a class="left waves-effect waves-red btn-flat" href="/users/<%=@user.uuid%>/edit">EDIT PROFILE</a>
+        <% end %>
+      </h4>
+      <%= if !@user.private do %>
+        <div class="white-text right" style="margin: 2rem">
+          <p style="font-size: 16px;
+    overflow-wrap: break-word;">
+            <%=@user.bio %> </p>
+        </div>
+      </div>
+      <div class="divider black" style="margin-top: 1rem; border-right: 100px solid white; width: 30%"></div>
+      <div class="card-content grey-text text-lighten-1">
+        <%= if @user.age do %>
+          <p  class="row" style="font-weight: 300; font-size: 16px; margin-bottom: -2rem">
+            Birth  <strong style="font-weight: 600; margin-left: 3px"> | <%= @user.age %></p>
+          <% end %>
+          <%= if @user.gender do %>
+            <p class="row" style="font-size: 16px; font-weight: 300"> Gender  <b style="font-weight: 600; margin-left: 3px"> | <%= @user.gender %></b></p>
+          <% end %>
+          <%= if @user.twitter do %>
+            <p class="row red-text text-darken-4" style="font-size: 18px; margin: 1rem 0 1rem 0"><a href="#" class="red-text text-darken-1">Twitter</a></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <p class="right"><%= link "See comments", to: Routes.user_comment_path(@conn, :index, @user.uuid), class: "red-text col s6 text-darken-1" %></p>
+  <% else %>
+    <div class="white-text" style="padding-bottom: 2em; margin: 2em">
+      <p  style="font-size: 16px">This profile is private.</p>
+    </div>
+  </div>
 </div>
-
-
-<h4 class="right"><%= link "See comments", to: Routes.user_comment_path(@conn, :index, @user.uuid), class: "red-text col s6 text-darken-2" %></h4>
+<% end %>

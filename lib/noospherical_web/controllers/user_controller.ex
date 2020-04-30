@@ -26,6 +26,9 @@ defmodule NoosphericalWeb.UserController do
   def create(conn, %{"user" => user_params}, _current_user) do
     case Accounts.register_user(user_params) do
       {:ok, user} ->
+        NoosphericalWeb.Email.welcome_email(user)
+        |> NoosphericalWeb.Mailer.deliver_now()
+
         conn
         |> NoosphericalWeb.Auth.login(user)
         |> put_flash(:info, "#{user.username} created.")
@@ -50,6 +53,19 @@ defmodule NoosphericalWeb.UserController do
     if current_user.uuid == uuid do
       changeset = Accounts.change_user(user)
       render(conn, "edit.html", user: user, changeset: changeset, current_user: current_user)
+    else
+      conn
+      |> put_flash(:error, "hissssss")
+      |> redirect(to: Routes.user_path(conn, :show, user))
+    end
+  end
+
+  def settings(conn, %{"user_id" => uuid}, current_user) do
+    user = Accounts.get_user!(uuid)
+
+    if current_user.uuid == uuid do
+      changeset = Accounts.change_user(user)
+      render(conn, "settings.html", user: user, changeset: changeset, current_user: current_user)
     else
       conn
       |> put_flash(:error, "hissssss")

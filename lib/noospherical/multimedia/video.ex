@@ -5,14 +5,17 @@ defmodule Noospherical.Multimedia.Video do
   schema "videos" do
     field :url, :string
     field :description, :string
-    field :slug, :string
     field :title, :string
 
     belongs_to :user, Noospherical.Accounts.User,
       foreign_key: :user_uuid,
       references: :uuid
 
-    belongs_to :category, Noospherical.Category
+    belongs_to :category, Noospherical.Category,
+      foreign_key: :category_id,
+      references: :id,
+      type: :integer
+
     has_many :video_comments, Noospherical.Multimedia.VideoComment
 
     timestamps()

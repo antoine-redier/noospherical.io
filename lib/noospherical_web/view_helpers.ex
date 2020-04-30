@@ -1,19 +1,12 @@
 defmodule NoosphericalWeb.ViewHelpers do
-  def gravatar(email) do
-    hash =
-      email
-      |> String.trim()
-      |> String.downcase()
-      |> :erlang.md5()
-      |> Base.encode16(case: :lower)
-
-    img = "https://www.gravatar.com/avatar/#{hash}?s=150&d=identicon"
-    Phoenix.HTML.Tag.img_tag(img, class: "circle")
+  def markdown(body) do
+    Phoenix.HTML.raw(body)
   end
 
-  def markdown(body) do
-    Earmark.as_html!(body)
-    |> Phoenix.HTML.raw()
+  def get_category(id) do
+    category = Noospherical.Repo.get!(Noospherical.Category, id)
+
+    category.name
   end
 
   def get_user_name(id) do
@@ -29,9 +22,92 @@ defmodule NoosphericalWeb.ViewHelpers do
   end
 
   def get_user_avatar(id) do
-    user = Noospherical.Repo.get!(Noospherical.Accounts.User, id)
+    img = "uploads/#{id}_thumb.png"
 
-    gravatar(user.email)
+    if File.exists?(img) do
+      Phoenix.HTML.Tag.img_tag(img,
+        class: "circle",
+        style: "width: 150px; height: 100%; box-shadow: 13px 3px 15px 2px rgba(0,0,0,0.8);"
+      )
+    else
+      Phoenix.HTML.Tag.img_tag(
+        "http://tinygraphs.com/squares/#{id}?theme=seascape&numcolors=4&size=150&fmt=svg",
+        class: "circle",
+        style:
+          "width: 150px; height: 100%; background: black; box-shadow: 13px 3px 15px 2px rgba(0,0,0,0.8);"
+      )
+    end
+  end
+
+  def get_user_banner(id) do
+    img = "uploads/#{id}_banner_thumb.png"
+
+    if File.exists?(img) do
+      Phoenix.HTML.Tag.img_tag(img,
+        class: "activator waves-light",
+        style:
+          "width: 100%; z-index: -1; box-shadow: 0px 7px 10px 0px rgba(0,0,0,0.8); filter: opacity(90%)"
+      )
+    else
+      Phoenix.HTML.Tag.img_tag(
+        "https://picsum.photos/seed/#{id}/1500/500",
+        class: "activator waves-light",
+        style:
+          "width: 100%; z-index: -1; box-shadow: 0px 7px 10px 0px rgba(0,0,0,0.8); filter: opacity(90%)"
+      )
+    end
+  end
+
+  def get_sidenav_banner(id) do
+    img = "uploads/#{id}_banner_sidenav.png"
+
+    if File.exists?(img) do
+      Phoenix.HTML.Tag.img_tag(img,
+        class: "activator waves-light",
+        style:
+          "z-index: -1; box-shadow: 0px 7px 10px 0px rgba(0,0,0,0.8); filter: blur(2px) opacity(60%)"
+      )
+    else
+      Phoenix.HTML.Tag.img_tag(
+        "https://picsum.photos/seed/#{id}/300/200",
+        class: "activator waves-light",
+        style:
+          " z-index: -1; box-shadow: 0px 7px 10px 0px rgba(0,0,0,0.8); filter: blur(2px) opacity(60%)"
+      )
+    end
+  end
+
+  def get_author_avatar(id) do
+    img = "uploads/#{id}_thumb.png"
+
+    if File.exists?(img) do
+      Phoenix.HTML.Tag.img_tag(img,
+        class: "circle",
+        style: "width: 150px; height: 100%"
+      )
+    else
+      Phoenix.HTML.Tag.img_tag(
+        "http://tinygraphs.com/squares/#{id}?theme=seascape&numcolors=4&size=220&fmt=svg",
+        class: "circle"
+      )
+    end
+  end
+
+  def get_sidenav_avatar(id) do
+    img = "uploads/#{id}_thumb.png"
+
+    if File.exists?(img) do
+      Phoenix.HTML.Tag.img_tag(img,
+        class: "circle",
+        style: "width: 100px; height: 100%"
+      )
+    else
+      Phoenix.HTML.Tag.img_tag(
+        "http://tinygraphs.com/squares/#{id}?theme=seascape&numcolors=4&size=220&fmt=svg",
+        class: "circle",
+        style: "width: 100px; height: 100%"
+      )
+    end
   end
 
   def get_user_twitter(id) do

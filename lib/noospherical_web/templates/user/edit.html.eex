@@ -1,5 +1,10 @@
-<h3 class="white-text">|> update_profile</h3>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
-
-<span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user) %></span>
+  <div>
+    <h3 class="white-text center">|> update_profile</h3>
+    <div class="divider grey darken-4 header-divider"></div>
+    <div class="divider transparent whitespace"></div>
+    <%= render(NoosphericalWeb.ImageView, "new.html", conn: @conn, current_user: @current_user, image_changeset: Ecto.Changeset.change(%Noospherical.Uploads.Image{})) %></div>
+  <div class="divider transparent whitespace"></div>
+  <%= render(NoosphericalWeb.ImageView, "new_banner.html", conn: @conn, current_user: @current_user, image_changeset: Ecto.Changeset.change(%Noospherical.Uploads.Image{})) %></div>
+<div class="divider transparent whitespace"></div>
+<%= render "edit_form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
+<span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user), class: "red-text text-darken-2 right" %></span>

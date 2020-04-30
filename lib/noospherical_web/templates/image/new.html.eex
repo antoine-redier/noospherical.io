@@ -1,0 +1,15 @@
+  
+  <div class="background grey darken-4 avatar-form-container">
+    <%= form_for @image_changeset, Routes.image_path(@conn, :create), [multipart: true], fn f -> %>
+    <label class="white-text">Profile Picture</label>
+    <div class="file-field input-field col s6">
+      <%= file_input f, :image, class: "btn validate"%>
+      <div class="file-path-wrapper">
+        <input class="file-path validate white-text" type="text" placeholder="(500x500 recommended - gif, png, jpg accepted)">
+      </div>
+      <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :image %></div>
+    </div>
+    <div class="form-group col">
+      <%= submit "upload", class: "btn red darken-2 right" %> </div>
+  <% end %>
+</div>

@@ -24,6 +24,31 @@ defmodule NoosphericalWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
+  plug Plug.Static,
+    at: "/uploads",
+    from: Path.expand('./uploads'),
+    gzip: false
+
+  plug Plug.Static,
+    at: "/users/uploads",
+    from: Path.expand('./uploads'),
+    gzip: false
+
+  plug Plug.Static,
+    at: "/about/uploads",
+    from: Path.expand('./uploads'),
+    gzip: false
+
+  plug Plug.Static,
+    at: "/articles/uploads",
+    from: Path.expand('./uploads'),
+    gzip: false
+
+  plug Plug.Static,
+    at: "/videos/uploads",
+    from: Path.expand('./uploads'),
+    gzip: false
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
@@ -36,10 +61,9 @@ defmodule NoosphericalWeb.Endpoint do
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
   plug Plug.Parsers,
-    parsers: [:urlencoded, :multipart, :json],
+    parsers: [:urlencoded, {:multipart, length: 8_741_824}, :json],
     pass: ["*/*"],
-    json_decoder: Phoenix.json_library(),
-    length: 1_073_741_824
+    json_decoder: Phoenix.json_library()
 
   plug Plug.MethodOverride
   plug Plug.Head

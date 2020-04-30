@@ -48,7 +48,10 @@ defmodule NoosphericalWeb.ArticleController do
 
     comment_changeset = Articles.Comment.changeset(%Articles.Comment{})
 
-    render(conn, "show.html", article: article, comment_changeset: comment_changeset)
+    render(conn, "show.html",
+      article: article,
+      comment_changeset: comment_changeset
+    )
   end
 
   def edit(conn, %{"id" => id}, current_user) do

@@ -1,11 +1,8 @@
   
-  <div class="container article-container">
-    <h3 class="white-text center"><%= @article.title %></h3>
-  </div>
+  <h3 class="white-text center"><%= @article.title %></h3>
+  <div class="divider grey darken-4 header-divider"></div>
+  <div class="divider transparent whitespace"></div>
   <ul>
-    <li class="red-text text-darken-2">
-      <%= @article.category_id %>
-    </li>
     <li class="article-body">
       <%= markdown(@article.body) %>
       <div class="article-timestamp left white-text">
@@ -13,15 +10,19 @@
       </div>
     </li>
   </ul>
+  <p class="red-text text-darken-2 right" style="font-size: 20px">category -
+    <b class="red-text text-darken-4" style="font-size: 21px; font-weight: 600"><%= get_category(@article.category_id) %></b>
+  </p>
   <div class="red-text text-darken-2 row">
     <a class="col s2" href="/users/<%=@article.user_uuid%>">
-      <div><%= get_user_avatar(@article.user_uuid) %> </div>
+      <div><%= get_author_avatar(@article.user_uuid) %> </div>
     </a>
     <b class="author-name col s10">
       <%=get_user_name(@article.user_uuid)%><br>
       <em class="author-username">@<%=get_user_username(@article.user_uuid)%></em><br>
-      <%= get_user_twitter(@article.user_uuid) %>
-    </b></div>
+      <div style="filter: invert(100%)"><%= get_user_twitter(@article.user_uuid) %></div>
+    </b>
+  </div>
   <%= if (@current_user && @current_user.admin) || (@current_user && @article.user_uuid == @current_user.uuid) do %>
     <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article), class: "red-text darken-2 right" %></span>
   <% end %>
@@ -31,12 +32,12 @@
   <%= else %>
     <p class="white-text center" style="font-size: 18px; margin-top: 10em">You must be <a class="red-text text-darken-2" href="/sessions/new">logged in</a> to post a comment.</p>
   <% end %>
-  <%= for comment <- @article.comments do %>
+  <%= for comment <- Enum.reverse(@article.comments) do %>
     <div class="row">
       <div class="col s12">
         <div class="card background transparent">
           <div class="card-content row">
-            <span class="card-title col s2">
+            <span class="card-title col s3">
               <a href="/users/<%=comment.user_uuid%>">
                 <%= get_user_avatar(comment.user_uuid) %></a>
             </span>

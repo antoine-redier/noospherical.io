@@ -1,0 +1,3 @@
+  <%= for user <- @users do %>
+    <img src="<%="./uploads/#{user.uuid}_thumb.png"%>"><br>
+  <% end %>

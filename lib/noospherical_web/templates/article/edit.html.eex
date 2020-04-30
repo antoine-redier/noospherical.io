@@ -1,3 +1,6 @@
-  <h3 class="white-text">|> update_article</h3>
+  
+  <h3 class="white-text center">|> update_article</h3>
+  <div class="divider grey darken-4 header-divider"></div>
+  <div class="divider transparent whitespace"></div>
   <%= render "form.html", Map.put(assigns, :action, Routes.article_path(@conn, :update, @article)) %>
   <span><%= link "Back", to: Routes.article_path(@conn, :index) %></span>

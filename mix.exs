@@ -20,7 +20,7 @@ defmodule Noospherical.MixProject do
   def application do
     [
       mod: {Noospherical.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :arc]
     ]
   end
 
@@ -47,7 +47,10 @@ defmodule Noospherical.MixProject do
       {:earmark, "~> 1.4.3"},
       {:scrivener_ecto, "~> 2.3"},
       {:scrivener_html, "~> 1.8"},
-      {:eliver, "~> 2.0.0", only: :dev}
+      {:eliver, "~> 2.0.0", only: :dev},
+      {:arc, "~> 0.11.0"},
+      {:arc_ecto, "0.11.3"},
+      {:bamboo, "~> 1.4"}
     ]
   end
 

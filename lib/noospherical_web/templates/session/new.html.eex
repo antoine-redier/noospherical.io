@@ -1,23 +1,20 @@
-<h3 class="white-text">|> login</h3>
-
-<div class="row" style="margin-bottom: 3rem"><%= form_for @conn, Routes.session_path(@conn, :create), [as: :session], fn f -> %>
-
-  <div class="input-field col s12">
-    <%= text_input f, :username, class: "validate white-text", type: "text", id: "username" %>
-    <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :username %></div>
-    <label class="white-text" for="username">Username</label>
+  <h3 class="white-text center">|> login</h3>
+  <div class="divider grey darken-4 header-divider"></div>
+  <div class="divider transparent whitespace"></div>
+  <div class="row" style="margin-bottom: 3rem"><%= form_for @conn, Routes.session_path(@conn, :create), [as: :session], fn f -> %>
+    <div class="input-field col s12">
+      <%= text_input f, :username, class: "validate white-text", type: "text", id: "username" %>
+      <div class="error-tag"><%= error_tag f, :username %></div>
+      <label class="white-text" for="username">Username</label>
+    </div>
+    <div class="input-field col s12">
+      <%= password_input f, :password, class: "validate white-text", type: "password", id: "password" %>
+      <div class="error-tag"><%= error_tag f, :username %></div>
+      <label class="white-text"  for="password">Password</label>
+    </div>
+    <%= link "Forgot your password?", to: Routes.recover_path(@conn, :new), class: "red-text text-darken-2 right" %>
+    <div class="col s12">
+      <%= submit "Log in", class: "col s6 btn red darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
+    </div>
   </div>
-
-
-  <div class="input-field col s12">
-    <%= password_input f, :password, class: "validate white-text", type: "password", id: "password" %>
-    <div style="font-size: 15px; margin-top: 1rem"><%= error_tag f, :username %></div>
-    <label class="white-text"  for="password">Password</label>
-  </div>
-
-  <div class="col s12">
-    <%= submit "Log in", class: "col s6 btn red darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
-  </div>
-</div>
-
 <% end %>

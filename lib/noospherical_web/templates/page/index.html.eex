@@ -5,11 +5,11 @@
     <p class="card-content">
       <%= link "ARTICLES", to: Routes.article_path(@conn, :index), class: "white-text left", style: "font-size: 30px; padding: 2rem" %>
     </p>
-    div>
-    <p class="card-content">
-      <%= link "VIDEOS", to: Routes.video_path(@conn, :index), class: "white-text right", style: " font-size: 30px; padding: 1rem; border: 1px solid white" %>
-    </p>
-    <p class="card-content">
-      <%= link "ABOUT", to: Routes.page_path(@conn, :about), class: "black-text center background white", style: "font-size: 30px; padding: 2rem" %>
-    </p>
-  </div>
+    <div>
+      <p class="card-content">
+        <%= link "VIDEOS", to: Routes.video_path(@conn, :index), class: "white-text right", style: " font-size: 30px; padding: 1rem; border: 1px solid white" %>
+      </p>
+      <p class="card-content">
+        <%= link "ABOUT", to: Routes.page_path(@conn, :about), class: "black-text center background white", style: "font-size: 30px; padding: 2rem" %>
+      </p>
+    </div>

@@ -22,9 +22,12 @@ defmodule NoosphericalWeb.Router do
 
     resources "/users", UserController do
       resources "/comments", CommentController, only: [:index]
+      get "/settings", UserController, :settings, as: :settings
     end
 
     resources "/sessions", SessionController, only: [:new, :create, :delete]
+
+    resources "/recover", RecoverController, only: [:new, :create, :show]
 
     resources "/articles", ArticleController do
       resources "/comments", CommentController, only: [:create]
@@ -32,6 +35,10 @@ defmodule NoosphericalWeb.Router do
 
     resources "/videos", VideoController do
       resources "/comments", CommentController, only: [:create]
+    end
+
+    resources "/images", ImageController do
+      post "/", ImageController, :create_banner, as: :create_banner
     end
   end
 

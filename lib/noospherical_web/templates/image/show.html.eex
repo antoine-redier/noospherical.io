@@ -1,0 +1,4 @@
+  <h1>Show Image</h1>
+  <img src="<%= NoosphericalWeb.Avatar.url({@image, @current_user.uuid}, :thumb)%>">
+  <span><%= link "Edit", to: Routes.image_path(@conn, :edit, @image) %></span>
+  <span><%= link "Back", to: Routes.image_path(@conn, :index) %></span>

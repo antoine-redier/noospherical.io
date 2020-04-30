@@ -7,6 +7,12 @@
 # General application configuration
 import Config
 
+config :noospherical, NoosphericalWeb.Mailer,
+  adapter: Bamboo.MailgunAdapter,
+  api_key: "your_api_key",
+  domain: "your_domain",
+  base_uri: "https://api.eu.mailgun.net/v3"
+
 config :scrivener_html,
   routes_helper: NoosphericalWeb.Router.Helpers
 
@@ -16,10 +22,10 @@ config :noospherical,
 # Configures the endpoint
 config :noospherical, NoosphericalWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "very_secret",
+  secret_key_base: "your_secret",
   render_errors: [view: NoosphericalWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Noospherical.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "salty"]
+  live_view: [signing_salt: "ci1cGxWn"]
 
 # Configures Elixir's Logger
 config :logger, :console,

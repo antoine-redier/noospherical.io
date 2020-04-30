@@ -7,12 +7,14 @@ defmodule Noospherical.Accounts.User do
     field :age, :string
     field :gender, :string
     field :twitter, :string
+    field :bio, :string
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
     field :username, :string
     field :admin, :boolean, default: false
     field :author, :boolean, default: false
+    field :private, :boolean, default: false
 
     has_many :articles, Noospherical.Articles.Article
     has_many :comments, Noospherical.Articles.Comment
@@ -24,9 +26,11 @@ defmodule Noospherical.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :email, :name, :age, :gender, :twitter])
+    |> cast(attrs, [:username, :email, :name, :age, :gender, :twitter, :bio, :private])
     |> validate_required([:username, :email])
     |> validate_length(:username, min: 3, max: 20)
+    |> validate_length(:name, min: 1, max: 50)
+    |> validate_length(:bio, max: 500)
     |> unique_constraint([:username, :email])
   end
 
@@ -35,6 +39,7 @@ defmodule Noospherical.Accounts.User do
     |> changeset(params)
     |> cast(params, [:password], [])
     |> validate_length(:password, min: 8, max: 100)
+    |> validate_confirmation(:password, message: "Passwords do not match.")
     |> put_pass_hash()
   end
 

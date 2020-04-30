@@ -42,10 +42,11 @@
         <ul id="slide-out" class="sidenav grey darken-4">
           <li>
             <div class="user-view">
-              <div class="background red darken-1">
+              <div class="background black"><%= get_sidenav_banner(@current_user.uuid) %>
               </div>
-              <a class="right" href="/users/<%=@current_user.uuid%>/edit"><i class="material-icons white-text">settings</i></a>
-              <a href="/users/<%= @current_user.uuid  %>"><img class="circle" src="<%=gravatar(@current_user.email) %>"></a>
+              <a class="right" href="/users/<%=@current_user.uuid%>/settings"><i class="material-icons white-text">settings</i></a>
+              <a href="/users/<%= @current_user.uuid  %>"><%= get_sidenav_avatar(@current_user.uuid) %>
+              </a>
               <a href="/users/<%= @current_user.uuid  %>"><span class="white-text name"><%= @current_user.name %></span></a>
               <div class="white-text email"><%=@current_user.email%></div>
             </div>
