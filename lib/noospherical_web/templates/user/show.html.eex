@@ -1,9 +1,8 @@
-  
   <div class="card user-card background transparent">
     <%= get_user_banner(@user.uuid) %>
     <div style="margin-left: 2rem; margin-top: -75px;">
       <%= get_user_avatar(@user.uuid) %>
-      <h4 class="white-text right" style="margin-right: 1rem"> <strong style="margin-bottom: 3rem; font-weight: 600; margin-top: -5rem">  <%= @user.name %> </strong>
+      <h4 class="white-text right" style="margin-right: 1rem"> <strong style="margin-bottom: 1rem; font-weight: 600; margin-top: -5rem">  <%= @user.name %> </strong>
         <b class="red-text text-darken-4" style="font-weight: 400; font-size: 20px"> @<%= @user.username %> </b>
         <%= if @user.uuid == @current_user.uuid do %>
           <br>
@@ -11,20 +10,21 @@
         <% end %>
       </h4>
       <%= if !@user.private do %>
-        <div class="white-text right" style="margin: 2rem">
-          <p style="font-size: 16px;
-    overflow-wrap: break-word;">
-            <%=@user.bio %> </p>
+        <div class="row right">
+          <div class ="col s12 grey-text" style="font-size: 15px;
+    overflow-wrap: break-word; border-right: 3px solid #d32f2f; padding: 2rem; width: 95%; background-color: #212121; border-radius: 5px 0 0 5px">
+            <%=@user.bio %>
+          </div>
         </div>
       </div>
-      <div class="divider black" style="margin-top: 1rem; border-right: 100px solid white; width: 30%"></div>
-      <div class="card-content grey-text text-lighten-1">
+      <div class="divider grey darken-4" style="margin-top: 1rem; border-right: 100px solid white; width: 30%"></div>
+      <div class="card-content grey-text ">
         <%= if @user.age do %>
           <p  class="row" style="font-weight: 300; font-size: 16px; margin-bottom: -2rem">
-            Birth  <strong style="font-weight: 600; margin-left: 3px"> | <%= @user.age %></p>
+            Birth  <strong class="white-text"  style="font-weight: 600; margin-left: 3px"> | <%= @user.age %></p>
           <% end %>
           <%= if @user.gender do %>
-            <p class="row" style="font-size: 16px; font-weight: 300"> Gender  <b style="font-weight: 600; margin-left: 3px"> | <%= @user.gender %></b></p>
+            <p style="font-size: 16px; font-weight: 300" class="row grey-text"> Gender  <b class="white-text" style="font-weight: 600; margin-left: 3px"> | <%= @user.gender %></b></p>
           <% end %>
           <%= if @user.twitter do %>
             <p class="row red-text text-darken-4" style="font-size: 18px; margin: 1rem 0 1rem 0"><a href="#" class="red-text text-darken-1">Twitter</a></p>
