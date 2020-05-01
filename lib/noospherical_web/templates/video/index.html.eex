@@ -1,4 +1,3 @@
-  
   <h3 class="white-text center">|> list_videos</h3>
   <div class="divider grey darken-4 header-divider"></div>
   <div class="divider transparent whitespace"></div>
@@ -7,7 +6,7 @@
       <div class="col s12">
         <div class="card post-card transparent">
           <div class="card-content white-text">
-            <span class="card-title" style="margin-bottom: 2rem"><%= video.title %><b style="font-size: 18px"> — <a class="red-text text-darken-2" href="/users/<%=video.user_uuid%>"><%=get_user_name(video.user_uuid)%></a></b></span>
+            <span class="card-title" style="margin-bottom: 2rem"><%= video.title %><b style="font-size: 18px"> — <a class="purple-text text-darken-2" href="/users/<%=video.user_uuid%>"><%=get_user_name(video.user_uuid)%></a></b></span>
             <p class="truncate grey-text" style="font-size: 16px"><%= video.description %>
             </p>
           </div>
@@ -23,6 +22,6 @@
     </div>
   <% end %>
   <%= if (@current_user && @current_user.admin) || (@current_user && @current_user.author) do %>
-    <span><%= link "New Video", to: Routes.video_path(@conn, :new), class: "red-text text-darken-2" %></span>
+    <span><%= link "New Video", to: Routes.video_path(@conn, :new), class: "purple-text text-darken-2" %></span>
   <% end %>
-  <div class="center"><%= pagination_links @page, view_style: :materialize %>></div>
+  <div class="center"><%= pagination_links @page, view_style: :foundation %></div>

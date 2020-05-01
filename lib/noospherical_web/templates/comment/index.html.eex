@@ -6,7 +6,7 @@
           <div class="card transparent">
             <div class="card-content row">
               <span class="card-title col s12"><b style="font-size: 23px">
-                  <a class="red-text text-darken-4 left" style="font-weight: 600" href="/articles/<%= get_article_url(comment.article_uuid) %>"> <%= get_article(comment.article_uuid) %></a></b>
+                  <a class="purple-text text-darken-4 left" style="font-weight: 600" href="/articles/<%= get_article_url(comment.article_uuid) %>"> <%= get_article(comment.article_uuid) %></a></b>
                 <div class="divider col s12"></div>
                 <b class="right grey-text" style="font-size: 12px"><%= comment.inserted_at %></b>
                 <br>
@@ -26,10 +26,10 @@
     <%= for comment <- @video_comments do %>
       <div class="row">
         <div class="col s12">
-          <div class="card background black">
+          <div class="card background transparent">
             <div class="card-content row">
               <span class="card-title col s12"><b style="font-size: 23px">
-                  <a class="red-text text-darken-4 right"  style="font-weight: 600" href="/videos/<%= get_video_url(comment.video_uuid) %>"> <%= get_video(comment.video_uuid) %></a></b>
+                  <a class="purple-text text-darken-4 right"  style="font-weight: 600" href="/videos/<%= get_video_url(comment.video_uuid) %>"> <%= get_video(comment.video_uuid) %></a></b>
                 <div class="divider col s12 grey darken-4"></div>
                 <b class="right grey-text" style="font-size: 12px"><%= comment.inserted_at %></b>
                 <br>

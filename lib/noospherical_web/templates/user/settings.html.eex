@@ -1,7 +1,6 @@
-  
   <div>
     <h3 class="white-text center">|> profile_settings</h3>
     <div class="divider grey darken-4 header-divider"></div>
     <div class="divider transparent whitespace"></div>
     <%= render "form.html", Map.put(assigns, :action, Routes.user_path(@conn, :update, @user)) %>
-    <span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user), class: "red-text text-darken-2 right" %></span>
+    <span><%= link "Back", to: Routes.user_path(@conn, :show, @current_user), class: "purple-text text-darken-2 right" %></span>

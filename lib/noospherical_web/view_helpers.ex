@@ -82,7 +82,7 @@ defmodule NoosphericalWeb.ViewHelpers do
     if File.exists?(img) do
       Phoenix.HTML.Tag.img_tag(img,
         class: "circle",
-        style: "width: 300px; border-right: 5px solid #d32f2f"
+        style: "width: 300px; border-right: 5px solid #d500f9"
       )
     else
       Phoenix.HTML.Tag.img_tag(

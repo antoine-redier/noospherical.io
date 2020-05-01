@@ -16,15 +16,15 @@
         <% end %>
       </script>
     </head>
-    <body>
-      <nav class="navbar transparent" style="box-shadow: none">
+    <body class="background grey lighten-3">
+      <nav class="navbar transparent" style="box-shadow: none; padding: 1rem; z-index: 1">
         <div class="nav-wrapper container">
           <div class="left">
-            <a href="/" class="brand-logo left" style="font-weight: 600; color: #aa00ff ">noospherical.io</a>
+            <a href="/" class="brand-logo white-text left hide-on-med-and-down" style="font-weight: 600">noospherical.io</a>
           </div>
           <ul class="right">
             <%= if @current_user do %>
-              <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large white-text"><i class="material-icons" style="color: #aa00ff ">menu</i></a></li>
+              <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large white-text"><i class="material-icons">menu</i></a></li>
               <li class="hide-on-med-and-down">
               </li>
             <% else %>
@@ -60,11 +60,20 @@
           <li><%= link "Log Out", class: "waves-effet white-text", to: Routes.session_path(@conn, :delete, @current_user), method: "delete" %></li>
         </ul>
       <% end %>
-      <main role="main" class="container" style="margin-top: 3em">
-        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+      <div class="cover row">
+        <div class="white-text center cover-overlay">
+          <p style="font-size: 170%; font-weight: 700">ＨＩＧＨ ＴＥＣＨ | ＬＯＷ ＬＩＦＥ</p>
+          <p style="font-size: 20px; margin-top: -1.5rem; filter: opacity(50%)">
+            プロパガンダの予防接種を受けていない
+          </p>
+        </div>
+        <video autoplay loop muted>
+          <source src="uploads/hero_1.mov" type="video/mp4">
+        </video>
+      </div>
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= render @view_module, @view_template, assigns %>
       <footer class="page-footer background black">
         <div class="footer-copyright">
           <div class="container center white-text" style="font-size: 15px">

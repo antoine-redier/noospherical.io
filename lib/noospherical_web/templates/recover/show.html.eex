@@ -1,4 +1,3 @@
-  
   <h3 class="white-text center">|> new_pass</h3>
   <div class="divider grey darken-4 header-divider"></div>
   <div class="divider transparent whitespace"></div>
@@ -20,7 +19,7 @@
     </div>
     <div class="divider grey darken-4 col s12 left" style="margin: 2rem"></div>
     <div class="col s12">
-      <%= submit "Submit", class: "col s6 btn red darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
+      <%= submit "Submit", class: "col s6 btn purple darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
     </div>
   </div>
 <% end %>

@@ -1,3 +1,4 @@
+  
   <h3 class="white-text center"><%= @video.title %></h3>
   <div class="divider grey darken-4 article-divider"></div>
   <div class="divider transparent whitespace"></div>
@@ -6,15 +7,15 @@
     <b class="white-text video-timestamp background transparent">
       <%= @video.inserted_at %>
     </b>
-    <b class="right red-text text-darken-2" style="font-size: 20px">category -
-      <b class="red-text text-darken-4" style="font-size: 21px; font-weight: 600"> <%= get_category(@video.category_id) %></b>
+    <b class="right purple-text text-darken-2" style="font-size: 20px">category -
+      <b class="purple-text text-darken-4" style="font-size: 21px; font-weight: 600"> <%= get_category(@video.category_id) %></b>
     </b>
     <p class=" grey-text video-description">
       <%= @video.description %>
     </p>
   </div>
 </div>
-<div class="red-text text-darken-2 row">
+<div class="purple-text text-darken-2 row">
   <a class="col s2" href="/users/<%=@video.user_uuid%>">
     <div class="author"><%= get_author_avatar(@video.user_uuid) %> </div>
   </a>
@@ -24,13 +25,13 @@
     <%= get_user_twitter(@video.user_uuid) %>
   </b></div>
 <%= if (@current_user && @current_user.admin) || (@current_user && @video.user_uuid == @current_user.uuid) do %>
-  <span><%= link "Edit", to: Routes.video_path(@conn, :edit, @video), class: "red-text darken-2 right" %></span>
+  <span><%= link "Edit", to: Routes.video_path(@conn, :edit, @video), class: "purple-text darken-2 right" %></span>
 <% end %>
-<span><%= link "Back", to: Routes.video_path(@conn, :index), class: "red-text darken-2 right", style: "margin-right: 2rem" %></span>
+<span><%= link "Back", to: Routes.video_path(@conn, :index), class: "purple-text darken-2 right", style: "margin-right: 2rem" %></span>
 <%= if @current_user do %>
   <div class="comment-input"><%= render NoosphericalWeb.CommentView, "new_vid.html", conn: @conn, video: @video, comment_changeset: @comment_changeset %></div>
 <%= else %>
-  <p class="white-text center" style="font-size: 18px; margin-top: 5rem">You must be <a class="red-text text-darken-2" href="/sessions/new">logged in</a> to post a comment.</p>
+  <p class="white-text center" style="font-size: 18px; margin-top: 5rem">You must be <a class="purple-text text-darken-2" href="/sessions/new">logged in</a> to post a comment.</p>
 <% end %>
 <%= for comment <- Enum.reverse(@video.video_comments) do %>
   <div class="row">
@@ -39,7 +40,7 @@
         <div class="card-content row">
           <span class="card-title col s3">
             <a href="/users/<%=comment.user_uuid%>"><%= get_user_avatar(comment.user_uuid) %></a></span>
-          <span class="card-title col s10 grey-text"><a class="comment-user red-text text-darken-2"  href="/users/<%=comment.user_uuid%>"><%= get_user_name(comment.user_uuid) %></a><em class="comment-name">  @<%= get_user_username(comment.user_uuid) %></em>
+          <span class="card-title col s10 grey-text"><a class="comment-user purple-text text-darken-2"  href="/users/<%=comment.user_uuid%>"><%= get_user_name(comment.user_uuid) %></a><em class="comment-name">  @<%= get_user_username(comment.user_uuid) %></em>
             <div class="divider comment-divider col s12 grey darken-4"></div>
             <b class="right" style="font-size: 11px"><%= comment.inserted_at %></b>
             <br>

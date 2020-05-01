@@ -9,10 +9,10 @@
       </div>
     </li>
   </ul>
-  <p class="red-text text-darken-2 right" style="font-size: 20px">category -
-    <b class="red-text text-darken-4" style="font-size: 21px; font-weight: 600"><%= get_category(@article.category_id) %></b>
+  <p class="purple-text text-darken-2 right" style="font-size: 20px">category -
+    <b class="purple-text text-darken-4" style="font-size: 21px; font-weight: 600"><%= get_category(@article.category_id) %></b>
   </p>
-  <div class="red-text text-darken-2 row">
+  <div class="purple-text text-darken-2 row">
     <a class="col s2" href="/users/<%=@article.user_uuid%>">
       <div class="author"><%= get_author_avatar(@article.user_uuid) %> </div>
     </a>
@@ -23,13 +23,13 @@
     </b>
   </div>
   <%= if (@current_user && @current_user.admin) || (@current_user && @article.user_uuid == @current_user.uuid) do %>
-    <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article), class: "red-text darken-2 right" %></span>
+    <span><%= link "Edit", to: Routes.article_path(@conn, :edit, @article), class: "purple-text darken-2 right" %></span>
   <% end %>
-  <span><%= link "Back", to: Routes.article_path(@conn, :index), class: "red-text darken-2 right", style: "margin-right: 2rem" %></span>
+  <span><%= link "Back", to: Routes.article_path(@conn, :index), class: "purple-text darken-2 right", style: "margin-right: 2rem" %></span>
   <%= if @current_user do %>
     <div class="comment-input"><%= render NoosphericalWeb.CommentView, "new.html", conn: @conn, article: @article, comment_changeset: @comment_changeset %></div>
   <%= else %>
-    <p class="white-text center" style="font-size: 18px; margin-top: 10em">You must be <a class="red-text text-darken-2" href="/sessions/new">logged in</a> to post a comment.</p>
+    <p class="white-text center" style="font-size: 18px; margin-top: 10em">You must be <a class="purple-text text-darken-2" href="/sessions/new">logged in</a> to post a comment.</p>
   <% end %>
   <%= for comment <- Enum.reverse(@article.comments) do %>
     <div class="row">
@@ -41,7 +41,7 @@
                 <%= get_user_avatar(comment.user_uuid) %></a>
             </span>
             <span class="card-title col s10 grey-text">
-              <a class="comment-user red-text text-darken-2" href="/users/<%=comment.user_uuid%>">
+              <a class="comment-user purple-text text-darken-2" href="/users/<%=comment.user_uuid%>">
                 <%= get_user_name(comment.user_uuid) %>
               </a>
               <em class="comment-name">  @<%= get_user_username(comment.user_uuid) %>

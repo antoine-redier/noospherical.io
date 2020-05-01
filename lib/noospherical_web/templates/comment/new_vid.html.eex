@@ -2,5 +2,5 @@
   <%= label f, :text, "Leave a comment", class: "control-label white-text" %>
   <%= text_input f, :text, class: "form-control white-text" %>
   <%= error_tag f, :text %>
-  <%= submit "Comment", class: "btn red darken-2" %>
+  <%= submit "Comment", class: "btn purple darken-2" %>
 <% end %>

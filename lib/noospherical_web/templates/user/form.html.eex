@@ -1,3 +1,4 @@
+  
   <div class="row" style="margin-bottom: 3rem"><%= form_for @changeset, @action, fn f -> %>
     <%= if @changeset.action do %>
       <div class="alert alert-danger" style="font-size: 20px; margin-bottom: 3rem">
@@ -32,7 +33,7 @@
     </div>
     <div class="divider grey darken-4 col s12 left" style="margin: 2rem"></div>
     <div class="col s12">
-      <%= submit "Submit", class: "col s6 btn red darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
+      <%= submit "Submit", class: "col s6 btn purple darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
     </div>
   </div>
 <% end %>

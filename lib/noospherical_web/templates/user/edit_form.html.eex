@@ -46,7 +46,7 @@
       <%= label f, "Profile accessibility", class: "white-text" %>
     </div>
     <div class="col s12">
-      <%= submit "Submit", class: "col s6 btn red darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
+      <%= submit "Submit", class: "col s6 btn purple darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
     </div>
   </div>
 <% end %>

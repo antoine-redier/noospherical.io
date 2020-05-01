@@ -10,7 +10,7 @@
             <span class="card-title" style="margin-bottom: 2rem">
               <%= article.title %>
               <b style="font-size: 18px"> —
-                <a class="red-text text-darken-2" href="/users/<%=article.user_uuid%>">
+                <a class="purple-text text-darken-2" href="/users/<%=article.user_uuid%>">
                   <%=get_user_name(article.user_uuid)%>
                 </a>
               </b>
@@ -29,6 +29,6 @@
     </div>
   <% end %>
   <%= if (@current_user && @current_user.admin) || (@current_user && @current_user.author) do %>
-    <span><%= link "New Article", to: Routes.article_path(@conn, :new), class: "red-text darken-2" %></span>
+    <span><%= link "New Article", to: Routes.article_path(@conn, :new), class: "purple-text darken-2" %></span>
   <% end %>
-  <div class="center"><%= pagination_links @page, view_style: :materialize %>></div>
+  <div class="center"><%= pagination_links @page, view_style: :foundation %></div>

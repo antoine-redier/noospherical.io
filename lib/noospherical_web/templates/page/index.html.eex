@@ -1,15 +1,14 @@
-  <%= if !@current_user do %>
-    <p class="white-text center"><%= link "Register", class: "red-text text-darken-2", to: Routes.user_path(@conn, :new) %> or <%= link "log in", class: "red-text text-darken-2", to: Routes.session_path(@conn, :new) %> to get full access.</p>
-  <% end %>
-  <div class="center landpg-placeholder">
-    <p class="card-content">
-      <%= link "ARTICLES", to: Routes.article_path(@conn, :index), class: "white-text left", style: "font-size: 30px; padding: 2rem" %>
-    </p>
-    <div>
-      <p class="card-content">
-        <%= link "VIDEOS", to: Routes.video_path(@conn, :index), class: "white-text right", style: " font-size: 30px; padding: 1rem; border: 1px solid white" %>
-      </p>
-      <p class="card-content">
-        <%= link "ABOUT", to: Routes.page_path(@conn, :about), class: "black-text center background white", style: "font-size: 30px; padding: 2rem" %>
-      </p>
+  
+  <div class="background purple accent-4" style="margin-top: -2rem; margin-bottom: -10em; padding: 2rem 1rem 3em 1rem; box-shadow: 0 0 200px black inset">
+    <%= if !@current_user do %>
+      <p class="white-text center"><%= link "Register", class: "red-text text-darken-2", to: Routes.user_path(@conn, :new) %> or <%= link "log in", class: "red-text text-darken-2", to: Routes.session_path(@conn, :new) %> to get full access.</p>
+    <% end %>
+    <div class="white-text" style="padding: 1rem; font-weight: 700; margin-top: 2rem">
+      #𝟷𝟶𝟷 <%= link "THE CYBERPUNK ENGINE", to: Routes.page_path(@conn, :about), class: "center", style: "color: black; font-size: 30px; font-weight: 700; border-left: 7px solid white; border-right: 7px solid white; padding: 1rem" %></div>
+    <div class="divider black" style="margin: 2em"></div>
+    <div style="padding: 1rem; margin-top: 3em">
+      <p class="center" style="font-size: 35px; padding: 1rem">║▌║▌║ | <%= link "ｐｏｓｔｓ", to: Routes.article_path(@conn, :index), class: "white-text"%> ║▌║│▌</p>
+      <div class="divider transparent" style="margin: 3em"></div>
+      <p class="center" style="font-size: 35px; padding: 1rem"> ║▌║▌║ | <%= link "ｖｉｄｅｏｓ", to: Routes.video_path(@conn, :index), class: "white-text" %> ║▌║│▌</p>
     </div>
+  </div>

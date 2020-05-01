@@ -33,9 +33,9 @@
   </div>
   <div class="row">
     <span>
-      <%= link "Back", to: Routes.article_path(@conn, :index), style: "font-size: 16px", class: "col s1 red-text text-darken-2" %>
+      <%= link "Back", to: Routes.article_path(@conn, :index), style: "font-size: 16px", class: "col s1 purple-text text-darken-2" %>
     </span>
-    <%= submit "Publish", class: "col s6 offset-6 btn red darken-2 waves-effect waves-light" %>
+    <%= submit "Publish", class: "col s6 offset-6 btn purple darken-2 waves-effect waves-light" %>
   </div>
 <% end %>
 <script src="//cdn.ckeditor.com/4.14.0/full/ckeditor.js"></script>

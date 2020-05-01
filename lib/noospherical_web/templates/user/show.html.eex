@@ -4,18 +4,20 @@
     <div style="margin-left: 2rem; margin-top: -75px;">
       <%= get_user_avatar(@user.uuid) %>
       <h4 class="white-text right" style="margin-right: 1rem"> <strong style="margin-bottom: 1rem; font-weight: 600; margin-top: -5rem">  <%= @user.name %> </strong>
-        <b class="red-text text-darken-4" style="font-weight: 400; font-size: 20px"> @<%= @user.username %> </b>
+        <b class="purple-text text-darken-4" style="font-weight: 400; font-size: 20px"> @<%= @user.username %> </b>
         <%= if @user.uuid == @current_user.uuid do %>
           <br>
-          <a class="left waves-effect waves-red btn-flat" href="/users/<%=@user.uuid%>/edit">EDIT PROFILE</a>
+          <a class="left waves-effect waves-purple btn-flat" href="/users/<%=@user.uuid%>/edit">EDIT PROFILE</a>
         <% end %>
       </h4>
       <%= if !@user.private do %>
         <div class="row right">
-          <div class ="col s12 grey-text" style="font-size: 15px;
-    overflow-wrap: break-word; border-right: 3px solid #d32f2f; padding: 2rem; width: 95%; background-color: #212121; border-radius: 5px 0 0 5px">
-            <%=@user.bio %>
-          </div>
+          <%= if @user.bio do %>
+            <div class ="col s12 grey-text" style="font-size: 15px;
+    overflow-wrap: break-word; border-right: 3px solid #d500f9; padding: 2rem; width: 95%; background-color: #212121; border-radius: 5px 0 0 5px">
+              <%=@user.bio %>
+            </div>
+          <% end %>
         </div>
       </div>
       <div class="divider grey darken-4" style="margin-top: 1rem; border-right: 100px solid white; width: 30%"></div>
@@ -28,7 +30,7 @@
             <p style="font-size: 16px; font-weight: 300" class="row grey-text"> Gender  <b class="white-text" style="font-weight: 600; margin-left: 3px"> | <%= @user.gender %></b></p>
           <% end %>
           <%= if @user.twitter do %>
-            <p class="row red-text text-darken-4" style="font-size: 16px; margin: 1rem 0 1rem 0"><a href="#" class="red-text text-darken-1 right">Twitter</a></p>
+            <p class="row purple-text text-darken-4" style="font-size: 16px; margin: 1rem 0 1rem 0"><a href="#" class="purple-text text-darken-1 right">Twitter</a></p>
           <% end %>
         </div>
         <p class="right"><%= link "See comments", to: Routes.user_comment_path(@conn, :index, @user.uuid), class: "grey-text  text-darken-4" %></p>

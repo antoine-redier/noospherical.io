@@ -1,3 +1,4 @@
+  
   <h3 class="white-text center">|> reset_pass</h3>
   <div class="divider grey darken-4 header-divider"></div>
   <%= form_for @conn, Routes.recover_path(@conn, :create), fn f -> %>
@@ -6,5 +7,5 @@
     <div class="error-tag"><%= error_tag f, :email %></div>
     <label class="white-text"  for="email">Email</label>
   </div>
-  <%= submit "Send mail", class: "right btn red darken-2 waves-effect waves-light"%>
+  <%= submit "Send mail", class: "right btn purple darken-2 waves-effect waves-light"%>
 <% end %>

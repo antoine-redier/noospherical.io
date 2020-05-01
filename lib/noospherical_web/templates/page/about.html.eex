@@ -1,53 +1,19 @@
-<h3 class="white-text">~whois</h2>
-
-      <div class="white-text">
-          <div class="row">
-            <div class="col s8">
-
-              <p>
-                I'm a self-taught web developer, in search of jobs or training.
-              </p>
-              <p>
-                Here you'll find all my projects (done or in progress), as well as a few blog posts and videos.
-              </p>
-              <p>
-                <a href="#" class="btn disabled red darken-2"
-                  >Portfolio</a
-                >
-              </p>
-            </div>
-
-
-            <div class="col s6 right" style="margin-top: 20em">
-              <h3>^skills</h3>
-                <div>
-
-                  <p>|> Elixir / Phoenix</p>
-                  <p>|> HTML / CSS</p>
-                  <p>|> Javascript / Node.js</p>
-                </div>
-
-            </div>
-          </div>
-        </div>
-
-
-        <div class="container left" style="margin-top: 5em">
-          <div class="row">
-
-
-              <form action="#" class="d-flex" class="subscribe">
-                <input
-                  type="text"
-                  class="white-text"
-                  placeholder="name@email.com"
-                />
-                <input
-                  type="submit"
-                  value="Subscribe to newsletter"
-                  class="btn disabled red darken-2"
-                />
-              </form>
-            </div>
-          </div>
-        </div>
+  <div class="white-text center" style="font-size: 35px; font-weight: 700; margin: 3rem; border-left: 7px solid black; border-right: 7px solid black;">ｗｈｏ ａｍ Ｉ？</div>
+  <div class="grey-text container" style="font-size: 18px; margin-top: 3rem">
+    <p>
+      I'm a self-taught web developer, in search of jobs or training.
+    </p>
+    <p>
+      This project was first supposed to be a portfolio to practice and demonstrate my skills.
+    </p>
+    <p>
+      However, I always wanted to create a creative hub for like-minded individuals, centered around cyberpunk, technology and science-fiction in general.
+    </p>
+    <p>
+      So I figured I'd create an entire, real-world application to do just that, which is an interesting showcase in and of itself.
+    </p>
+    <p>
+      I developped, designed and deployed the whole website by myself, same case for maintenance.
+    </p>
+  </div>
+  <a href="https://twitter.com/noospherical" style="font-weight: 700" class="black-text right btn waves-effect waves-light white">Contact Me</a>

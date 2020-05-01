@@ -1,3 +1,4 @@
+  
   <h3 class="white-text center">|> login</h3>
   <div class="divider grey darken-4 header-divider"></div>
   <div class="divider transparent whitespace"></div>
@@ -12,9 +13,9 @@
       <div class="error-tag"><%= error_tag f, :username %></div>
       <label class="white-text"  for="password">Password</label>
     </div>
-    <%= link "Forgot your password?", to: Routes.recover_path(@conn, :new), class: "red-text text-darken-2 right" %>
+    <%= link "Forgot your password?", to: Routes.recover_path(@conn, :new), class: "purple-text text-darken-2 right" %>
     <div class="col s12">
-      <%= submit "Log in", class: "col s6 btn red darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
+      <%= submit "Log in", class: "col s6 btn purple darken-2 waves-effect waves-light", style: "margin-top: 2rem" %>
     </div>
   </div>
 <% end %>
