@@ -31,8 +31,7 @@ footer {
 }
 
 .user-card {
-    border-bottom: 3px solid #212121; border-left: 1px solid #212121;
-    box-shadow: 13px 3px 50px 2px rgba(0,0,0,0.8)
+    border-bottom: 5px solid #212121; border-left: 1px solid #212121;
 }
 
 .index-row {
@@ -45,6 +44,21 @@ footer {
     font-weight: 600;
     background: none;
 }
+
+.author:hover {
+    -webkit-animation: fadein 6s linear;  
+    -moz-animation: fadein 6s linear;  
+    -ms-animation: fadein 6s linear;  
+    -o-animation: fadein 6s linear;  
+    animation: fadein 6s linear; 
+}
+
+@keyframes fadein {
+    0%,100% { filter: invert(0%) }
+    50%   { filter: invert(100%) }
+}
+
+
 
 .article-container {
     padding-right: 2rem; 

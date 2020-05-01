@@ -1,4 +1,3 @@
-  
   <h3 class="white-text center"><%= @article.title %></h3>
   <div class="divider grey darken-4 header-divider"></div>
   <div class="divider transparent whitespace"></div>
@@ -15,7 +14,7 @@
   </p>
   <div class="red-text text-darken-2 row">
     <a class="col s2" href="/users/<%=@article.user_uuid%>">
-      <div><%= get_author_avatar(@article.user_uuid) %> </div>
+      <div class="author"><%= get_author_avatar(@article.user_uuid) %> </div>
     </a>
     <b class="author-name col s10">
       <%=get_user_name(@article.user_uuid)%><br>

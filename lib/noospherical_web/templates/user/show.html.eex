@@ -1,3 +1,4 @@
+  
   <div class="card user-card background transparent">
     <%= get_user_banner(@user.uuid) %>
     <div style="margin-left: 2rem; margin-top: -75px;">
@@ -27,12 +28,12 @@
             <p style="font-size: 16px; font-weight: 300" class="row grey-text"> Gender  <b class="white-text" style="font-weight: 600; margin-left: 3px"> | <%= @user.gender %></b></p>
           <% end %>
           <%= if @user.twitter do %>
-            <p class="row red-text text-darken-4" style="font-size: 18px; margin: 1rem 0 1rem 0"><a href="#" class="red-text text-darken-1">Twitter</a></p>
+            <p class="row red-text text-darken-4" style="font-size: 16px; margin: 1rem 0 1rem 0"><a href="#" class="red-text text-darken-1 right">Twitter</a></p>
           <% end %>
         </div>
+        <p class="right"><%= link "See comments", to: Routes.user_comment_path(@conn, :index, @user.uuid), class: "grey-text  text-darken-4" %></p>
       </div>
     </div>
-    <p class="right"><%= link "See comments", to: Routes.user_comment_path(@conn, :index, @user.uuid), class: "red-text col s6 text-darken-1" %></p>
   <% else %>
     <div class="white-text" style="padding-bottom: 2em; margin: 2em">
       <p  style="font-size: 16px">This profile is private.</p>
